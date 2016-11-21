@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/task 
+	http://www.springframework.org/schema/task/spring-task.xsd">
+
+	<!-- <bean id="sybService" class="com.org.syb.service.impl.SybService"></bean>
+
+	<bean id="ticsTotalService" class="com.org.tics.service.impl.TicsTotalService"></bean>
+
+	<task:scheduled-tasks>
+		"* * */5 * * ?" 每四个小时执行一次   
+		<task:scheduled ref="sybService" method="taskSyb" cron="0 0 */4 * * ?" />
+		"0 30 0 * * ?"  每日零点三十分执行   
+		<task:scheduled ref="ticsTotalService" method="taskTics" cron="0 58 11 * * ?" />
+
+	</task:scheduled-tasks> -->
+
+</beans>
