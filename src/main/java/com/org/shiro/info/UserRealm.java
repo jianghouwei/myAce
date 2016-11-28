@@ -31,7 +31,7 @@ public class UserRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
 			throws AuthenticationException {
-		//UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) authcToken;
+		UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) authcToken;
 		/*UserInfo user = userInfoService.selectByLoginName(token.getUsername());
 		if (user != null && doCaptchaValidate(token)) {
 			Set<String> stringPermissions = null;

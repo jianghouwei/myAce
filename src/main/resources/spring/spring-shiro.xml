@@ -26,7 +26,6 @@
 		<property name="securityManager" ref="securityManager" />
 		<property name="loginUrl" value="/**"/><!-- 登录页面 -->
 		<property name="successUrl" value="admin/index" /><!-- 登录成功页面  -->
-		<!-- <property name="unauthorizedUrl" value="/" /> --> 
 		<property name="filters">
 			<map>
 				<entry key="authc" value-ref="myCaptchaFilter" />
@@ -35,6 +34,7 @@
 		<property name="filterChainDefinitions">
 			<value>
 				/logout                     = logout
+				/tologin					= anon
 				/static/login/** 			= anon
 				/static/js/myjs/** 			= anon
 				/static/js/** 				= anon

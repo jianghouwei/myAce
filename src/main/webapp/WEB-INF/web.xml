@@ -41,8 +41,8 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:spring/spring-bean.xml,
-		classpath:spring/spring-mybatis.xml,
-		classpath:spring/spring-task.xml,
+		classpath:spring/spring-mybatis.xml, 
+		<!-- classpath:spring/spring-task.xml, -->
 		classpath:spring/spring-shiro.xml,
 		classpath:spring/spring-redis.xml
 		</param-value>
@@ -71,8 +71,23 @@
 		<init-param>
 			<!-- 是否有边框 -->
 			<param-name>kaptcha.border</param-name>
-			<param-value>no</param-value>
+			<param-value>yes</param-value>
 		</init-param>
+		<init-param>
+			<!-- 字体颜色 -->
+			<param-name>kaptcha.textproducer.font.color</param-name>
+			<param-value>blue</param-value>
+		</init-param>
+		<!-- <init-param>
+			背景渐变颜色
+			<param-name>kaptcha.background.clear.from</param-name>
+			<param-value></param-value>
+		</init-param>
+		<init-param>
+			背景渐变颜色
+			<param-name>kaptcha.background.clear.to</param-name>
+			<param-value></param-value>
+		</init-param> -->
 		<init-param>
 			<!-- 验证码长度 -->
 			<param-name>kaptcha.textproducer.char.length</param-name>
