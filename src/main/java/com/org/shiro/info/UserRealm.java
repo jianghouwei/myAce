@@ -1,5 +1,7 @@
 package com.org.shiro.info;
 
+import java.util.Set;
+
 import javax.annotation.PostConstruct;
 
 import org.apache.log4j.Logger;
@@ -7,15 +9,25 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.SimpleAuthenticationInfo;
 import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
+import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.org.common.utils.Encodes;
 import com.org.shiro.exception.CaptchaException;
+import com.org.shiro.exception.UserInfoNullException;
+import com.org.shiro.model.ShiroUser;
 import com.org.shiro.utils.UserUtil;
+import com.org.sys.model.Users;
+import com.org.sys.service.CommonService;
 
 /**
  * 用户登录授权service(shrioRealm)
@@ -25,75 +37,83 @@ public class UserRealm extends AuthorizingRealm {
 
 	protected static Logger logger = Logger.getLogger(UserRealm.class);
 
+	@Autowired
+	private CommonService commonService;
+
 	/**
 	 * 认证回调函数,登录时调用.
 	 */
 	@Override
-	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken)
-			throws AuthenticationException {
+	protected AuthenticationInfo doGetAuthenticationInfo(
+			AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordCaptchaToken token = (UsernamePasswordCaptchaToken) authcToken;
-		/*UserInfo user = userInfoService.selectByLoginName(token.getUsername());
+		Users user = commonService.selectUsersByLoginName(token.getUsername());
 		if (user != null && doCaptchaValidate(token)) {
-			Set<String> stringPermissions = null;
-			Set<String> roles = rolesService.getRolesByUserId(user.getId());
-			if(!roles.isEmpty()){
-				String lag = roles.iterator().next();
-				stringPermissions = permissionService.getPermissionByUserId(user.getId(),lag);
-			}
+			token.setUserId(user.getId());
 			byte[] salt = Encodes.decodeHex(user.getSalt());
-			ShiroUser shiroUser = new ShiroUser(user.getId(), user.getLoginName(), 
-			user.getName(),user.getUserType(),roles,stringPermissions);
 			// 设置用户session
-			Session session = SecurityUtils.getSubject().getSession();
-			logger.info("Session默认超时时间为[" + session.getTimeout() + "]毫秒");
-			session.setAttribute("shiroUser", shiroUser);//user  权限和
-			session.setAttribute("user", user);//用户详情
-			return new SimpleAuthenticationInfo(shiroUser, user.getPassword(), ByteSource.Util.bytes(salt), getName());
+			setSession("userId", user.getId());
+			return new SimpleAuthenticationInfo(user.getUserName(),
+					user.getPassword(), ByteSource.Util.bytes(salt), getName());
 		} else {
-		   throw new UserInfoNullException("用户不存在！");
-		}*/
-		return null;
+			throw new UserInfoNullException("用户不存在！");
+		}
 	}
 
 	/**
 	 * 授权查询回调函数, 进行鉴权但缓存中无用户的授权信息时调用.
 	 */
 	@Override
-	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
+	protected AuthorizationInfo doGetAuthorizationInfo(
+			PrincipalCollection principals) {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-		/*ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		//依据登录名
-		//把principals放session中 key=userId value=principals
+		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
+		// 依据登录名
+		// 把principals放session中 key=userId value=principals
 		SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(shiroUser.getId()),
-				SecurityUtils.getSubject().getPrincipals());
-		Set<String> roles = null;//角色
-		Set<String> stringPermissions = null ;//权限
-		if(shiroUser.getRoles() == null){
-			roles = rolesService.getRolesByUserId(shiroUser.getId());
-		}else{
-			roles = shiroUser.getRoles();
-		}
-		//无角色坑定无权限
-		if(shiroUser.getStringPermissions() == null && !roles.isEmpty()){
-			String lag = roles.iterator().next();
-			stringPermissions = permissionService.getPermissionByUserId(shiroUser.getId(),lag);
-		}else{
-			stringPermissions = shiroUser.getStringPermissions();
+						SecurityUtils.getSubject().getPrincipals());
+		Integer userId = (Integer) getSession("userId");
+		Set<String> stringPermissions = null;// 权限
+		Set<String> roles = commonService.selectRoleByUserId(userId);// 角色
+		if (!roles.isEmpty()) {
+			stringPermissions = commonService.selectAuthByUserId(userId);
 		}
 		// 赋予角色
-		for(String role:roles){
+		for (String role : roles) {
 			info.addRole(role);
 		}
 		// 赋予权限
-		for(String permission:stringPermissions){
-			//判断是否有  del view addf edit addc jurisdiction
+		for (String permission : stringPermissions) {
+			// 判断是否有 del view addf edit addc jurisdiction
 			info.addStringPermission(permission);
 		}
-		*//***************************//*
-			//设置一些用户登录记录
-		*//***************************/
+		/***************************/
+		/* 设置一些用户登录记录
+		 * 登录记录		   */	
+		/***************************/
 		return info;
 
+	}
+
+	protected static void setSession(Object key, Object value) {
+		Subject currentUser = SecurityUtils.getSubject();
+		if (null != currentUser) {
+			Session session = currentUser.getSession();
+			if (null != session) {
+				session.setAttribute(key, value);
+			}
+		}
+	}
+	
+	protected static Object getSession(Object key) {
+		Subject currentUser = SecurityUtils.getSubject();
+		if (null != currentUser) {
+			Session session = currentUser.getSession();
+			if (null != session) {
+				return session.getAttribute(key);
+			}
+		}
+		return null;
 	}
 
 	/**
@@ -103,8 +123,11 @@ public class UserRealm extends AuthorizingRealm {
 	 * @return boolean
 	 */
 	protected boolean doCaptchaValidate(UsernamePasswordCaptchaToken token) {
-		String captcha = (String) SecurityUtils.getSubject().getSession()
-				.getAttribute(com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
+		String captcha = (String) SecurityUtils
+				.getSubject()
+				.getSession()
+				.getAttribute(
+						com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY);
 		if (captcha != null && !captcha.equalsIgnoreCase(token.getCaptcha())) {
 			throw new CaptchaException("验证码错误！");
 		}
@@ -116,11 +139,12 @@ public class UserRealm extends AuthorizingRealm {
 	 */
 	@PostConstruct
 	public void initCredentialsMatcher() {
-		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(UserUtil.HASH_ALGORITHM);
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(
+				UserUtil.HASH_ALGORITHM);
 		matcher.setHashIterations(UserUtil.HASH_INTERATIONS);
 		setCredentialsMatcher(matcher);
 	}
-	
+
 	@Override
 	public void clearCachedAuthorizationInfo(PrincipalCollection principals) {
 		super.clearCachedAuthorizationInfo(principals);
@@ -148,5 +172,4 @@ public class UserRealm extends AuthorizingRealm {
 		clearAllCachedAuthenticationInfo();
 		clearAllCachedAuthorizationInfo();
 	}
-
 }

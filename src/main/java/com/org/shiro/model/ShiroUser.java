@@ -3,8 +3,6 @@ package com.org.shiro.model;
 import java.io.Serializable;
 import java.util.Set;
 
-import org.apache.xmlbeans.UserType;
-
 import com.google.common.base.Objects;
 
 /**
@@ -14,86 +12,78 @@ public class ShiroUser implements Serializable {
 
 	/**
 	 * serialVersionUID:TODO(用一句话描述这个变量表示什么).
+	 * 
 	 * @since JDK 1.7
 	 */
 	private static final long serialVersionUID = 8255683668102181982L;
-	
-	private Long id;
+
+	private Integer id;
 	private String loginName;
 	private String name;
-	private Long userType;
+	private Integer userType;
 	private Set<String> roles;
 	private Set<String> stringPermissions;
 
-	public ShiroUser(Long id, String loginName, String name) {
+	private static String superRole = "admin";
+
+	public ShiroUser(Integer id, String loginName, String name) {
 		this.id = id;
 		this.loginName = loginName;
 		this.name = name;
 	}
-	
 
-	public ShiroUser(Long id, String loginName, String name, Long userType) {
+	public ShiroUser(Integer id, String loginName, String name, Integer userType) {
 		super();
 		this.id = id;
 		this.loginName = loginName;
 		this.name = name;
 		this.userType = userType;
 	}
-
-	public ShiroUser(Long id, String loginName, String name, Long userType,
-			Set<String> roles, Set<String> stringPermissions) {
-		super();
-		this.id = id;
-		this.loginName = loginName;
-		this.name = name;
-		this.userType = userType;
-		this.roles = roles;
-		this.stringPermissions = stringPermissions;
+	/**
+	 * 
+	 *
+	 * TODO(是否有超级管理员权限)
+	 *
+	 * @author mao.ru
+	 * @return
+	 * @since JDK 1.7
+	 * 
+	 */
+	public Boolean hasSuperUser(){
+		if(roles != null && roles.contains(superRole)){
+			return Boolean.TRUE;
+		}else{
+			return Boolean.FALSE;
+		}
 	}
 
-	
-
-	public ShiroUser(Long id, String loginName, String name, Long userType,
-			Set<String> roles, Set<String> stringPermissions,
-			UserType userTypeModel) {
-		super();
-		this.id = id;
-		this.loginName = loginName;
-		this.name = name;
-		this.userType = userType;
-		this.roles = roles;
-		this.stringPermissions = stringPermissions;
+	public String getSuperRole() {
+		return superRole;
 	}
-
 
 	public Set<String> getRoles() {
 		return roles;
 	}
 
-
 	public Set<String> getStringPermissions() {
 		return stringPermissions;
 	}
 
-
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
-	
-	public Long getUserType() {
+
+	public Integer getUserType() {
 		return userType;
 	}
-	
 
 	public String getLoginName() {
 		return loginName;
 	}
-
-
 
 	/**
 	 * 本函数输出将作为默认的<shiro:principal/>输出.
@@ -135,9 +125,5 @@ public class ShiroUser implements Serializable {
 		}
 		return true;
 	}
-
-	
-	
-	
 
 }

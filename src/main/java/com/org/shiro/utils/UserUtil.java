@@ -6,7 +6,7 @@ import org.apache.shiro.session.Session;
 import com.org.common.utils.Digests;
 import com.org.common.utils.Encodes;
 import com.org.shiro.model.ShiroUser;
-import com.org.shiro.model.UserInfo;
+import com.org.sys.model.Users;
 
 
 
@@ -50,10 +50,10 @@ public class UserUtil {
 	 * 获取当前用户对象
 	 * @return user
 	 */
-	public static UserInfo getCurrentUser(){
+	public static Users getCurrentUser(){
 		Session session =SecurityUtils.getSubject().getSession();
 		if(null!=session){
-			return (UserInfo) session.getAttribute("user");
+			return (Users) session.getAttribute("user");
 		}else{
 			return null;
 		}
@@ -63,11 +63,11 @@ public class UserUtil {
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
-	public static void entryptPassword(UserInfo user) {
+	public static void entryptPassword(Users user) {
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		user.setSalt(Encodes.encodeHex(salt));
+		//user.setSalt(Encodes.encodeHex(salt));
 
-		byte[] hashPassword = Digests.sha1(user.getPlainPassword().getBytes(), salt, HASH_INTERATIONS);
+		byte[] hashPassword = Digests.sha1(user.getPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
 	}
 }

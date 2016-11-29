@@ -30,6 +30,7 @@ public class FormAuthenticationCaptchaFilter extends FormAuthenticationFilter {
 		String captcha = getCaptcha(request);
 		boolean rememberMe = isRememberMe(request);
 		String host = getHost(request);
+		//验证验证码
 		return new UsernamePasswordCaptchaToken(username, password.toCharArray(), rememberMe, host, captcha);
 	}
 }

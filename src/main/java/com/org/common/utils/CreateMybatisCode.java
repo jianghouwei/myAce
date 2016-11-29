@@ -17,6 +17,7 @@ import org.mybatis.generator.internal.DefaultShellCallback;
 public class CreateMybatisCode {
 	
 	public static void main(String[] args) throws IOException, XMLParserException, InvalidConfigurationException, SQLException, InterruptedException {
+		  System.out.println("开始生成。。。。。。");
 		  List<String> warnings = new ArrayList<String>();   
 		  boolean overwrite = true;  
 		  URL file = CreateMybatisCode.class.getClassLoader().getResource("");
@@ -26,6 +27,7 @@ public class CreateMybatisCode {
 		  DefaultShellCallback callback = new DefaultShellCallback(overwrite);   
 		  MyBatisGenerator myBatisGenerator = new MyBatisGenerator(config, callback, warnings);   
 		  myBatisGenerator.generate(null); 
+		  System.out.println("生成结束。。。。。。");
 	}
 
 }

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.org.sys.dao.UsersMapper">
+	<resultMap id="BaseResultMap" type="com.org.sys.model.Users">
+		<id column="id" property="id" jdbcType="INTEGER" />
+		<result column="uid" property="uid" jdbcType="VARCHAR" />
+		<result column="user_name" property="userName" jdbcType="VARCHAR" />
+		<result column="password" property="password" jdbcType="VARCHAR" />
+		<result column="salt" property="salt" jdbcType="VARCHAR" />
+		<result column="sex" property="sex" jdbcType="VARCHAR" />
+		<result column="nike_name" property="nikeName" jdbcType="VARCHAR" />
+		<result column="phone" property="phone" jdbcType="VARCHAR" />
+		<result column="pic_url" property="picUrl" jdbcType="VARCHAR" />
+		<result column="birthday" property="birthday" jdbcType="VARCHAR" />
+		<result column="email" property="email" jdbcType="VARCHAR" />
+		<result column="tx_qq" property="txQq" jdbcType="VARCHAR" />
+		<result column="wy_wb" property="wyWb" jdbcType="VARCHAR" />
+		<result column="tx_wx" property="txWx" jdbcType="VARCHAR" />
+		<result column="maxim" property="maxim" jdbcType="VARCHAR" />
+		<result column="joined" property="joined" jdbcType="TIMESTAMP" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, uid, user_name, password, salt, sex, nike_name, phone, pic_url,
+		birthday, email,
+		tx_qq, wy_wb, tx_wx, maxim, joined
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from users
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from users
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.org.sys.model.Users">
+		insert into users (id, uid, user_name,
+		password, salt, sex,
+		nike_name, phone, pic_url,
+		birthday, email, tx_qq,
+		wy_wb, tx_wx, maxim,
+		joined)
+		values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
+		#{userName,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+		#{nikeName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+		#{picUrl,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{txQq,jdbcType=VARCHAR},
+		#{wyWb,jdbcType=VARCHAR}, #{txWx,jdbcType=VARCHAR},
+		#{maxim,jdbcType=VARCHAR},
+		#{joined,jdbcType=TIMESTAMP})
+	</insert>
+	<insert id="insertSelective" parameterType="com.org.sys.model.Users">
+		insert into users
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="uid != null">
+				uid,
+			</if>
+			<if test="userName != null">
+				user_name,
+			</if>
+			<if test="password != null">
+				password,
+			</if>
+			<if test="salt != null">
+				salt,
+			</if>
+			<if test="sex != null">
+				sex,
+			</if>
+			<if test="nikeName != null">
+				nike_name,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="picUrl != null">
+				pic_url,
+			</if>
+			<if test="birthday != null">
+				birthday,
+			</if>
+			<if test="email != null">
+				email,
+			</if>
+			<if test="txQq != null">
+				tx_qq,
+			</if>
+			<if test="wyWb != null">
+				wy_wb,
+			</if>
+			<if test="txWx != null">
+				tx_wx,
+			</if>
+			<if test="maxim != null">
+				maxim,
+			</if>
+			<if test="joined != null">
+				joined,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				#{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				#{password,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				#{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				#{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="nikeName != null">
+				#{nikeName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				#{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				#{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="txQq != null">
+				#{txQq,jdbcType=VARCHAR},
+			</if>
+			<if test="wyWb != null">
+				#{wyWb,jdbcType=VARCHAR},
+			</if>
+			<if test="txWx != null">
+				#{txWx,jdbcType=VARCHAR},
+			</if>
+			<if test="maxim != null">
+				#{maxim,jdbcType=VARCHAR},
+			</if>
+			<if test="joined != null">
+				#{joined,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.org.sys.model.Users">
+		update users
+		<set>
+			<if test="uid != null">
+				uid = #{uid,jdbcType=VARCHAR},
+			</if>
+			<if test="userName != null">
+				user_name = #{userName,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				password = #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="salt != null">
+				salt = #{salt,jdbcType=VARCHAR},
+			</if>
+			<if test="sex != null">
+				sex = #{sex,jdbcType=VARCHAR},
+			</if>
+			<if test="nikeName != null">
+				nike_name = #{nikeName,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="picUrl != null">
+				pic_url = #{picUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="birthday != null">
+				birthday = #{birthday,jdbcType=VARCHAR},
+			</if>
+			<if test="email != null">
+				email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="txQq != null">
+				tx_qq = #{txQq,jdbcType=VARCHAR},
+			</if>
+			<if test="wyWb != null">
+				wy_wb = #{wyWb,jdbcType=VARCHAR},
+			</if>
+			<if test="txWx != null">
+				tx_wx = #{txWx,jdbcType=VARCHAR},
+			</if>
+			<if test="maxim != null">
+				maxim = #{maxim,jdbcType=VARCHAR},
+			</if>
+			<if test="joined != null">
+				joined = #{joined,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.org.sys.model.Users">
+		update users
+		set uid = #{uid,jdbcType=VARCHAR},
+		user_name = #{userName,jdbcType=VARCHAR},
+		password = #{password,jdbcType=VARCHAR},
+		salt = #{salt,jdbcType=VARCHAR},
+		sex = #{sex,jdbcType=VARCHAR},
+		nike_name = #{nikeName,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		pic_url = #{picUrl,jdbcType=VARCHAR},
+		birthday = #{birthday,jdbcType=VARCHAR},
+		email = #{email,jdbcType=VARCHAR},
+		tx_qq = #{txQq,jdbcType=VARCHAR},
+		wy_wb = #{wyWb,jdbcType=VARCHAR},
+		tx_wx = #{txWx,jdbcType=VARCHAR},
+		maxim = #{maxim,jdbcType=VARCHAR},
+		joined = #{joined,jdbcType=TIMESTAMP}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectByLoginName" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from users
+		where user_name = #{loginName,jdbcType=VARCHAR}
+		OR phone =
+		#{loginName,jdbcType=VARCHAR}
+	</select>
+</mapper>

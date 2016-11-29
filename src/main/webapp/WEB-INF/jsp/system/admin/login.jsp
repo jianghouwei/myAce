@@ -61,12 +61,13 @@
 
 										<div class="space-6"></div>
 										<!-- onsubmit="return check();" -->
-										<form action="dologin" method="POST" id="login-form" class="form-horizontal">
+										<form action="dologin" method="POST" id="login-form"
+											class="form-horizontal">
 											<fieldset>
 												<div class="form-group">
 													<label class="block clearfix"> <span
 														class="block input-icon input-icon-right"> <input
-															name="userName" id="userName" type="text"
+															name="username" id="username" type="text"
 															class="form-control" placeholder="登录名/手机号码" /> <i
 															class="ace-icon fa fa-user"></i>
 													</span>
@@ -86,8 +87,9 @@
 														class="block input-icon input-icon-right "> <img
 															class="width-45 pull-left" id="img_captcha" alt="点击更换"
 															title="点击更换"
-															src="<%=basePath%>static/login/images/kaptcha.jpg" /> 
-															<input type="text" class="width-45 pull-right" name="captcha" id="captcha" />
+															src="<%=basePath%>static/login/images/kaptcha.jpg" /> <input
+															type="text" class="width-45 pull-right" name="captcha"
+															id="captcha" />
 													</span>
 													</label>
 												</div>
@@ -308,77 +310,6 @@
 								'static/login/images/kaptcha.jpg?t='
 										+ genTimestamp());
 					});
-
-			$('#login-form')
-					.validate(
-							{
-								errorElement : 'div',
-								errorClass : 'help-block',
-								focusInvalid : false,
-								ignore : "",
-								rules : {
-									password : {
-										required : true,
-										minlength : 5
-									},
-									userName : {
-										required : true
-									},
-									captcha : {
-										required : true
-									}
-								},
-								messages : {
-									password : {
-										required : "请输入密码！",
-										minlength : "密码长度必须大于6!"
-									},
-									userName : {
-										required : "请输入登录名!",
-
-									},
-									captcha : {
-										required :"请输入验证码!"
-									}
-								},
-								highlight : function(e) {
-									$(e).closest('.form-group').removeClass(
-											'has-info').addClass('has-error');
-								},
-
-								success : function(e) {
-									$(e).closest('.form-group').removeClass(
-											'has-error');
-									$(e).remove();
-								},
-
-								errorPlacement : function(error, element) {
-									if (element.is('input[type=checkbox]')
-											|| element.is('input[type=radio]')) {
-										var controls = element
-												.closest('div[class*="input-icon"]');
-										if (controls.find(':checkbox,:radio').length > 1)
-											controls.append(error);
-										else
-											error.insertAfter(element.nextAll(
-													'.lbl:eq(0)').eq(0));
-									} else if (element.is('.select2')) {
-										error
-												.insertAfter(element
-														.siblings('[class*="select2-container"]:eq(0)'));
-									} else if (element.is('.chosen-select')) {
-										error
-												.insertAfter(element
-														.siblings('[class*="chosen-container"]:eq(0)'));
-									} else
-										error.insertAfter(element.parent());
-								},
-
-								submitHandler : function(form) {
-								},
-								invalidHandler : function(form) {
-								}
-							});
 		});
 
 		//you don't need this, just used for changing background

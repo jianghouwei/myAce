@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.org.sys.dao.LoginLogMapper" >
+  <resultMap id="BaseResultMap" type="com.org.sys.model.LoginLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="logout_time" property="logoutTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="country" property="country" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="region" property="region" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="country_id" property="countryId" jdbcType="VARCHAR" />
+    <result column="region_id" property="regionId" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, user_id, login_time, logout_time, create_time, ip, country, area, region, city, 
+    area_id, country_id, region_id, city_id
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from login_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from login_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.org.sys.model.LoginLog" >
+    insert into login_log (id, user_id, login_time, 
+      logout_time, create_time, ip, 
+      country, area, region, 
+      city, area_id, country_id, 
+      region_id, city_id)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{logoutTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{ip,jdbcType=VARCHAR}, 
+      #{country,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{region,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{areaId,jdbcType=VARCHAR}, #{countryId,jdbcType=VARCHAR}, 
+      #{regionId,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.org.sys.model.LoginLog" >
+    insert into login_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="loginTime != null" >
+        login_time,
+      </if>
+      <if test="logoutTime != null" >
+        logout_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="ip != null" >
+        ip,
+      </if>
+      <if test="country != null" >
+        country,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="region != null" >
+        region,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="countryId != null" >
+        country_id,
+      </if>
+      <if test="regionId != null" >
+        region_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null" >
+        #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logoutTime != null" >
+        #{logoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.org.sys.model.LoginLog" >
+    update login_log
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="loginTime != null" >
+        login_time = #{loginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="logoutTime != null" >
+        logout_time = #{logoutTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="ip != null" >
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null" >
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="region != null" >
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="countryId != null" >
+        country_id = #{countryId,jdbcType=VARCHAR},
+      </if>
+      <if test="regionId != null" >
+        region_id = #{regionId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.org.sys.model.LoginLog" >
+    update login_log
+    set user_id = #{userId,jdbcType=INTEGER},
+      login_time = #{loginTime,jdbcType=TIMESTAMP},
+      logout_time = #{logoutTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      ip = #{ip,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      region = #{region,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      country_id = #{countryId,jdbcType=VARCHAR},
+      region_id = #{regionId,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

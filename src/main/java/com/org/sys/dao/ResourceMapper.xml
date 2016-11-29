@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.org.sys.dao.ResourceMapper" >
+  <resultMap id="BaseResultMap" type="com.org.sys.model.Resource" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+    <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
+    <result column="level_pid" property="levelPid" jdbcType="INTEGER" />
+    <result column="leve_sort" property="leveSort" jdbcType="VARCHAR" />
+    <result column="menu_msg" property="menuMsg" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.org.sys.model.Resource" extends="BaseResultMap" >
+    <result column="menu_url" property="menuUrl" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, menu_name, menu_icon, level_pid, leve_sort, menu_msg
+  </sql>
+  <sql id="Blob_Column_List" >
+    menu_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from resource
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resource
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.org.sys.model.Resource" >
+    insert into resource (id, menu_name, menu_icon, 
+      level_pid, leve_sort, menu_msg, 
+      menu_url)
+    values (#{id,jdbcType=INTEGER}, #{menuName,jdbcType=VARCHAR}, #{menuIcon,jdbcType=VARCHAR}, 
+      #{levelPid,jdbcType=INTEGER}, #{leveSort,jdbcType=VARCHAR}, #{menuMsg,jdbcType=VARCHAR}, 
+      #{menuUrl,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.org.sys.model.Resource" >
+    insert into resource
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="menuName != null" >
+        menu_name,
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon,
+      </if>
+      <if test="levelPid != null" >
+        level_pid,
+      </if>
+      <if test="leveSort != null" >
+        leve_sort,
+      </if>
+      <if test="menuMsg != null" >
+        menu_msg,
+      </if>
+      <if test="menuUrl != null" >
+        menu_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="menuName != null" >
+        #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="levelPid != null" >
+        #{levelPid,jdbcType=INTEGER},
+      </if>
+      <if test="leveSort != null" >
+        #{leveSort,jdbcType=VARCHAR},
+      </if>
+      <if test="menuMsg != null" >
+        #{menuMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        #{menuUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.org.sys.model.Resource" >
+    update resource
+    <set >
+      <if test="menuName != null" >
+        menu_name = #{menuName,jdbcType=VARCHAR},
+      </if>
+      <if test="menuIcon != null" >
+        menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="levelPid != null" >
+        level_pid = #{levelPid,jdbcType=INTEGER},
+      </if>
+      <if test="leveSort != null" >
+        leve_sort = #{leveSort,jdbcType=VARCHAR},
+      </if>
+      <if test="menuMsg != null" >
+        menu_msg = #{menuMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="menuUrl != null" >
+        menu_url = #{menuUrl,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.org.sys.model.Resource" >
+    update resource
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      level_pid = #{levelPid,jdbcType=INTEGER},
+      leve_sort = #{leveSort,jdbcType=VARCHAR},
+      menu_msg = #{menuMsg,jdbcType=VARCHAR},
+      menu_url = #{menuUrl,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.org.sys.model.Resource" >
+    update resource
+    set menu_name = #{menuName,jdbcType=VARCHAR},
+      menu_icon = #{menuIcon,jdbcType=VARCHAR},
+      level_pid = #{levelPid,jdbcType=INTEGER},
+      leve_sort = #{leveSort,jdbcType=VARCHAR},
+      menu_msg = #{menuMsg,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
