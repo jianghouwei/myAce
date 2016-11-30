@@ -30,11 +30,11 @@ public class ShiroController {
 	 * 访问登录页
 	 * @return
 	 */
-	@RequestMapping(value="/tologin")
+	@RequestMapping(value="test/jqGrid")
 	public ModelAndView toLogin(HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("system/admin/login");
+		mv.setViewName("system/test/jqGrid");
 		return mv;
 	}
 	
@@ -46,7 +46,7 @@ public class ShiroController {
 	public ModelAndView doLogin(HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("system/admin/login");
+		mv.setViewName("system/admin/index");
 		return mv;
 	}
 	/**

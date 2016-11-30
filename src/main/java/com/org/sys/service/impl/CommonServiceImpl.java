@@ -5,6 +5,7 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.org.sys.dao.RoleAuthMapper;
 import com.org.sys.dao.RoleMapper;
 import com.org.sys.dao.UsersMapper;
 import com.org.sys.model.Users;
@@ -17,6 +18,8 @@ public class CommonServiceImpl implements CommonService{
 	private UsersMapper usersMapper;
 	@Autowired
 	private RoleMapper roleMapper;
+	@Autowired
+	private RoleAuthMapper roleAuthMapper;
 	
 	
 	@Override
@@ -33,7 +36,7 @@ public class CommonServiceImpl implements CommonService{
 
 	@Override
 	public Set<String> selectAuthByUserId(Integer userId) {
-		return null;
+		return roleAuthMapper.getAuthsByUserId(userId);
 	}
 
 }

@@ -28,7 +28,7 @@
 		<%@ include file="left.jsp"%>
 		<div class="main-content">
 			<div class="main-content-inner">
-				<iframe name="mainFrame" id="mainFrame" ></iframe>
+				<iframe name="mainFrame" id="mainFrame" src="test/jqGrid" style="margin:0 auto;width:100%;height:100%;"></iframe>
 			</div>
 		</div>
 		<div class="footer">

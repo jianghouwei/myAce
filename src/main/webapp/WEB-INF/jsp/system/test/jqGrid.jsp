@@ -6,9 +6,12 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<base href="<%=basePath%>">
+<%@ include file="../../system/admin/common.jsp"%>
 </head>
 <body>
 	<div class="page-header">
@@ -43,6 +46,8 @@
 	</div>
 	<!-- /.row -->
 </body>
+<script src="static/js/jquery.jqGrid.min.js"></script>
+		<script src="static/js/grid.locale-en.js"></script>
 <!-- inline scripts related to this page -->
 <script type="text/javascript">
 	var grid_data = [ {

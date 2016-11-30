@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50711
 File Encoding         : 65001
 
-Date: 2016-11-29 17:44:58
+Date: 2016-11-30 18:05:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -66,6 +66,7 @@ CREATE TABLE `group_type` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `group_name` varchar(255) DEFAULT NULL COMMENT '组别名称',
   `group_code` varchar(255) DEFAULT NULL COMMENT '组别编码',
+  `group_parent` int(255) DEFAULT NULL,
   `create_time` datetime DEFAULT NULL,
   `create_user` varchar(255) DEFAULT NULL,
   `update_time` datetime DEFAULT NULL,
@@ -76,7 +77,7 @@ CREATE TABLE `group_type` (
 -- ----------------------------
 -- Records of group_type
 -- ----------------------------
-INSERT INTO `group_type` VALUES ('1', '信心中心', 'yf', null, null, null, null);
+INSERT INTO `group_type` VALUES ('1', '信心中心', 'yf', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for group_users
@@ -159,12 +160,20 @@ CREATE TABLE `resource` (
   `leve_sort` varchar(255) DEFAULT NULL COMMENT '菜单排序',
   `menu_msg` varchar(255) DEFAULT NULL COMMENT '菜单描述',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of resource
 -- ----------------------------
-INSERT INTO `resource` VALUES ('1', '/jqGrid', '1', null, '0', '1', null);
+INSERT INTO `resource` VALUES ('1', '#', '系统管理', 'fa fa-cog', '0', '1', null);
+INSERT INTO `resource` VALUES ('2', '#', '测试页面', 'fa fa-text-width', '0', '2', null);
+INSERT INTO `resource` VALUES ('3', 'sys/userinfo', '用户管理', 'fa fa-users', '1', '1', null);
+INSERT INTO `resource` VALUES ('4', 'sys/roleinfo', '角色管理', 'fa fa-id-badge', '1', '2', null);
+INSERT INTO `resource` VALUES ('5', 'sys/menuinfo', '菜单管理', 'fa fa-bars', '1', '3', null);
+INSERT INTO `resource` VALUES ('6', 'test/jqgridinfo', 'jqGrid测试', null, '2', '1', null);
+INSERT INTO `resource` VALUES ('7', 'test/jqtableinfo', 'jqTable测试', null, '2', '1', null);
+INSERT INTO `resource` VALUES ('8', 'sys/companyinfo', '公司管理', 'fa fa-building', '1', '4', null);
+INSERT INTO `resource` VALUES ('9', 'sys/groupinfo', '组别(部门管理)管理', 'fa fa-object-group', '1', '5', null);
 
 -- ----------------------------
 -- Table structure for role
@@ -197,11 +206,12 @@ CREATE TABLE `role_auth` (
   KEY `role_auth_authid` (`auth_id`),
   CONSTRAINT `role_auth_authid` FOREIGN KEY (`auth_id`) REFERENCES `menu_authority` (`id`),
   CONSTRAINT `role_auth_roleid` FOREIGN KEY (`role_id`) REFERENCES `role` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of role_auth
 -- ----------------------------
+INSERT INTO `role_auth` VALUES ('1', '1', '1');
 
 -- ----------------------------
 -- Table structure for role_group
@@ -273,5 +283,5 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', '10000', 'admin', '28cd71f2aca434914ad2b7c20336d3274c3cfe00', '3f5528b17865004a', null, '总管理员', '18818200818', null, null, null, null, null, null, null, null);
-INSERT INTO `users` VALUES ('2', '10001', 'xiao', '28cd71f2aca434914ad2b7c20336d3274c3cfe00', '3f5528b17865004a', null, '测试', null, null, null, null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('1', '10000', 'admin', '68defba00d9356c6d827468e9b5721ddafed30df', 'e6b91df9c4d38311', null, '总管理员', '18818200818', null, null, null, null, null, null, null, null);
+INSERT INTO `users` VALUES ('2', '10001', 'xiao', '68defba00d9356c6d827468e9b5721ddafed30df', 'e6b91df9c4d38311', null, '测试', null, null, null, null, null, null, null, null, null);
