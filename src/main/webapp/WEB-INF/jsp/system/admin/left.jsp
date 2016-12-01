@@ -6,6 +6,20 @@
 			ace.settings.loadState('sidebar')
 		} catch (e) {
 		}
+
+		function siMenu(id, fid, name, url) {
+			if (id != mid) {
+				$("#" + mid).removeClass();
+				mid = id;
+			}
+			if (fid != fmid) {
+				$("#" + fmid).removeClass();
+				fmid = fid;
+			}
+			$("#" + fid).attr("class", "active open");
+			$("#" + id).attr("class", "active");
+			top.mainFrame.tabAddHandler(id, name, url);
+		}
 	</script>
 	<!-- 快捷菜单栏  -->
 	<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
@@ -42,22 +56,17 @@
 					系统管理</span> <b class="arrow fa fa-angle-down"></b>
 		</a> <b class="arrow"></b>
 			<ul class="submenu">
-				<li class="">
-					<a href="tables.html"> <i
-						class="menu-icon fa fa-caret-right"></i> 静态表
-					</a> <b class="arrow"></b></li>
+				<li class="active"><a href="test/jqGrid" target="mainFrame"> <i
+						class="menu-icon fa fa-caret-right"></i> JqGrid test
+				</a> <b class="arrow"></b></li>
 
-				<li class="active">
-						<a href="jqgrid.html"> <i
+				<li class=""><a href="jqgrid.html"> <i
 						class="menu-icon fa fa-caret-right"></i> 动态表
-						</a><b class="arrow"></b>
-				</li>
-				<li>
-					<a href="#" class="dropdown-toggle"> <i
+				</a><b class="arrow"></b></li>
+				<li><a href="#" class="dropdown-toggle"> <i
 						class="menu-icon fa fa-caret-right"></i> 菜单布局 <b
 						class="arrow fa fa-angle-down"></b>
-					</a>
-					<b class="arrow"></b>
+				</a> <b class="arrow"></b>
 					<ul class="submenu">
 						<li class=""><a href="top-menu.html"> <i
 								class="menu-icon fa fa-caret-right"></i> 顶部布局

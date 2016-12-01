@@ -14,41 +14,39 @@
 <%@ include file="../../system/admin/common.jsp"%>
 </head>
 <body>
-	<div class="page-header">
-		<h1>
-			jqGrid <small> <i class="ace-icon fa fa-angle-double-right"></i>
-				Dynamic tables and grids using jqGrid plugin
-			</small>
-		</h1>
-	</div>
-	<!-- /.page-header -->
-
-	<div class="row">
-		<div class="col-xs-12">
-			<!-- PAGE CONTENT BEGINS -->
-			<div class="alert alert-info">
-				<button class="close" data-dismiss="alert">
-					<i class="ace-icon fa fa-times"></i>
-				</button>
-
-				<i class="ace-icon fa fa-hand-o-right"></i> Please note that demo
-				server is not configured to save the changes, therefore you may see
-				an error message.
+	<div class="main-content">
+		<div class="main-content-inner">
+			<div class="page-header">
+				<h1>
+					jqGrid <small> <i class="ace-icon fa fa-angle-double-right"></i>
+						Dynamic tables and grids using jqGrid plugin
+					</small>
+				</h1>
 			</div>
+			<!-- /.page-header -->
+			<div class="row">
+				<div class="col-xs-12">
+					<!-- PAGE CONTENT BEGINS -->
+					<div class="alert alert-info">
+						<button class="close" data-dismiss="alert">
+							<i class="ace-icon fa fa-times"></i>
+						</button>
 
-			<table id="grid-table"></table>
-
-			<div id="grid-pager"></div>
-
-			<!-- PAGE CONTENT ENDS -->
+						<i class="ace-icon fa fa-hand-o-right"></i> Please note that demo
+						server is not configured to save the changes, therefore you may
+						see an error message.
+					</div>
+					<table id="grid-table"></table>
+					<div id="grid-pager"></div>
+					<!-- PAGE CONTENT ENDS -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
 		</div>
-		<!-- /.col -->
 	</div>
-	<!-- /.row -->
 </body>
-<script src="static/js/jquery.jqGrid.min.js"></script>
-		<script src="static/js/grid.locale-en.js"></script>
-<!-- inline scripts related to this page -->
+<!-- basic scripts -->
 <script type="text/javascript">
 	var grid_data = [ {
 		id : "1",
@@ -256,7 +254,6 @@
 		$(window).on('resize.jqGrid', function() {
 			$(grid_selector).jqGrid('setGridWidth', parent_column.width());
 		})
-
 		//resize on sidebar collapse/expand
 		$(document).on(
 				'settings.ace.jqGrid',
@@ -265,14 +262,12 @@
 							|| event_name === 'main_container_fixed') {
 						//setTimeout is for webkit only to give time for DOM changes and then redraw!!!
 						setTimeout(function() {
-							$(grid_selector).jqGrid('setGridWidth',
-									parent_column.width());
+							$(grid_selector).jqGrid('setGridWidth',parent_column.width());
 						}, 20);
 					}
 				})
 
 		//if your grid is inside another element, for example a tab pane, you should use its parent's width:
-		/**
 		$(window).on('resize.jqGrid', function () {
 			var parent_width = $(grid_selector).closest('.tab-pane').width();
 			$(grid_selector).jqGrid( 'setGridWidth', parent_width );
@@ -284,28 +279,24 @@
 			$(grid_selector).jqGrid( 'setGridWidth', parent_width );
 		  }
 		})
-		 */
-
 		jQuery(grid_selector)
 				.jqGrid(
 						{
 							//direction: "rtl",
-
 							//subgrid options
 							subGrid : true,
-							//subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
+							subGridModel: [{ name : ['No','Item Name','Qty'], width : [55,200,80] }],
 							//datatype: "xml",
 							subGridOptions : {
 								plusicon : "ace-icon fa fa-plus center bigger-110 blue",
 								minusicon : "ace-icon fa fa-minus center bigger-110 blue",
 								openicon : "ace-icon fa fa-chevron-right center orange"
-							},
-							//for this example we are using local data
+							},//
+							//字表数据
 							subGridRowExpanded : function(subgridDivId, rowId) {
 								var subgridTableId = subgridDivId + "_t";
 								$("#" + subgridDivId)
-										.html(
-												"<table id='" + subgridTableId + "'></table>");
+										.html("<table id='" + subgridTableId + "'></table>");
 								$("#" + subgridTableId).jqGrid({
 									datatype : 'local',
 									data : subgrid_data,
@@ -325,9 +316,9 @@
 
 							data : grid_data,
 							datatype : "local",
-							height : 250,
-							colNames : [ ' ', 'ID', 'Last Sales', 'Name',
-									'Stock', 'Ship via', 'Notes' ],
+							
+							height: "auto",
+							colNames : [ ' ', 'ID', 'Last Sales', 'Name','Stock', 'Ship via', 'Notes' ],
 							colModel : [
 									{
 										name : 'myac',
@@ -339,13 +330,11 @@
 										formatter : 'actions',
 										formatoptions : {
 											keys : true,
-											//delbutton: false,//disable delete button
-
 											delOptions : {
 												recreateForm : true,
 												beforeShowForm : beforeDeleteCallback
 											},
-										//editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
+										editformbutton:true, editOptions:{recreateForm: true, beforeShowForm:beforeEditCallback}
 										}
 									},
 									{
@@ -412,27 +401,21 @@
 							pager : pager_selector,
 							altRows : true,
 							//toppager: true,
-
 							multiselect : true,
 							//multikey: "ctrlKey",
 							multiboxonly : true,
-
 							loadComplete : function() {
 								var table = this;
 								setTimeout(function() {
 									styleCheckbox(table);
-
 									updateActionIcons(table);
 									updatePagerIcons(table);
 									enableTooltips(table);
 								}, 0);
 							},
-
 							editurl : "./dummy.php",//nothing is saved
 							caption : "jqGrid with inline editing"
-
 						//,autowidth: true,
-
 						/**
 						,
 						grouping:true, 

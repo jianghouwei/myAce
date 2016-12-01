@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
 import org.springframework.stereotype.Controller;
@@ -39,17 +41,6 @@ public class ShiroController {
 	}
 	
 	/**
-	 * 登录
-	 * @return
-	 */
-	@RequestMapping(value="/dologin")
-	public ModelAndView doLogin(HttpServletRequest request,
-			HttpServletResponse response)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("system/admin/index");
-		return mv;
-	}
-	/**
 	 * 登陆成功
 	 * @return
 	 * @throws IOException 
@@ -79,22 +70,22 @@ public class ShiroController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="login",method = RequestMethod.POST)
+	@RequestMapping(value="dologin",method = RequestMethod.POST)
 	public ModelAndView fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
 		ModelAndView mv = new ModelAndView();
-		/*Subject subject = SecurityUtils.getSubject();
-		UserInfo userinfo = this.getUserInfo();
+		Subject subject = SecurityUtils.getSubject();
+		/*UserInfo userinfo = this.getUserInfo();
 		if((subject.isAuthenticated()||subject.isRemembered())&& userinfo != null){
 			List<Resource> menuList = menuService.getMenusByUserId(userinfo.getId());
 			mv.addObject("menuList", menuList);
 			mv.setViewName("system/admin/index");
 			return mv;
 		}*/
-		/*subject.logout();
-		mv.setViewName("system/admin/login");*/
+		subject.logout();
+		mv.setViewName("system/admin/login");
 		return mv;
 	}
 	
@@ -105,5 +96,21 @@ public class ShiroController {
 	@RequestMapping(value="/tab")
 	public String tab(){
 		return "system/admin/tab";
+	}
+	
+	/**
+	 * 登出
+	 * @param userName
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="logout")
+	public ModelAndView logout(HttpServletRequest request,
+			HttpServletResponse response,Model model) {
+		Subject subject = SecurityUtils.getSubject();
+		subject.logout();
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("system/admin/login");
+		return mv;
 	}
 }

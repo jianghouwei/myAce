@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="org.apache.shiro.web.filter.authc.FormAuthenticationFilter"%>
+<%@ page import="org.apache.shiro.authc.ExcessiveAttemptsException"%>
+<%@ page import="org.apache.shiro.authc.IncorrectCredentialsException"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String error = (String) request
+			.getAttribute(FormAuthenticationFilter.DEFAULT_ERROR_KEY_ATTRIBUTE_NAME);
+	request.setAttribute("error", error);
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -88,8 +95,9 @@
 															class="width-45 pull-left" id="img_captcha" alt="点击更换"
 															title="点击更换"
 															src="<%=basePath%>static/login/images/kaptcha.jpg" /> <input
-															type="text" class="width-45 pull-right" name="captcha"
-															id="captcha" />
+															type="text" class="form-control width-45 pull-right"
+															name="captcha" id="captcha" placeholder="验证码" /> <i
+															class="ace-icon">验</i>
 													</span>
 													</label>
 												</div>
@@ -99,7 +107,7 @@
 														class="ace" /> <span class="lbl"> 记住我</span>
 													</label>
 
-													<button  type="submit"
+													<button type="submit"
 														class="width-35 pull-right btn btn-sm btn-primary">
 														<i class="ace-icon fa fa-key"></i> <span
 															class="bigger-110">登录</span>
@@ -294,6 +302,7 @@
 	<script src="static/js/jquery-additional-methods.min.js"></script>
 	<script src="static/js/bootbox.js"></script>
 	<script src="static/js/jquery.maskedinput.min.js"></script>
+	<script src="static/js/jquery.maskedinput.min.js"></script>
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		jQuery(function($) {
@@ -310,8 +319,56 @@
 								'static/login/images/kaptcha.jpg?t='
 										+ genTimestamp());
 					});
-		});
+			var errormsg = "${error}".toString();
+			alert(errormsg);
+			if (errormsg == "com.org.utils.CaptchaException") {
+				$("#captcha").tips({
+					side : 1,
+					msg : "验证码输入有误",
+					bg : '#FF5080',
+					time : 5
+				});
+				$("#captcha").focus();
+			}
+			if (errormsg == "org.apache.shiro.authc.UnknownAccountException"
+					|| errormsg == "org.apache.shiro.authc.IncorrectCredentialsException") {
+				$("#username").tips({
+					side : 2,
+					msg : "用户名或密码有误",
+					bg : '#FF5080',
+					time : 5
+				});
+				$("#username").focus();
+			}
+			if (errormsg == "org.apache.shiro.authc.AuthenticationException") {
+				$("#username").tips({
+					side : 2,
+					msg : "用户不存在",
+					bg : '#FF5080',
+					time : 5
+				});
+				$("#username").focus();
+			}
 
+			if (errormsg == "com.org.utils.UserInfoNullException") {
+				$("#username").tips({
+					side : 2,
+					msg : "用户不存在",
+					bg : '#FF5080',
+					time : 5
+				});
+				$("#username").focus();
+			}
+			if (errormsg == "null") {
+				$("#username").tips({
+					side : 3,
+					msg : "请清理浏览器缓存[Ctrl+Alt+Del]",
+					bg : '#FF5080',
+					time : 8
+				});
+				$("#username").focus();
+			} 
+		});
 		//you don't need this, just used for changing background
 		jQuery(function($) {
 			$('#btn-login-dark').on('click', function(e) {
@@ -341,6 +398,82 @@
 			var time = new Date();
 			return time.getTime();
 		}
+	</script>
+	<script type="text/javascript">
+		$('#login-form')
+				.validate(
+						{
+							errorElement : 'div',
+							errorClass : 'help-block',
+							focusInvalid : false,
+							ignore : "",
+							rules : {
+								username : {
+									required : true,
+									minlength : 5
+								},
+								password : {
+									required : true,
+									minlength : 6
+								},
+								captcha : {
+									required : true,
+									maxlength : 4,
+									minlength : 4
+								}
+							},
+							messages : {
+								username : {
+									required : "请输入登录名!",
+									minlength : "登录名最小长度为5"
+								},
+								password : {
+									required : "请输入密码!",
+									minlength : "登录名最小长度为6"
+								},
+								captcha : {
+									required : "请输入验证码!",
+									maxlength : "验证码长度为4",
+									minlength : "验证码长度为4"
+								}
+							},
+
+							highlight : function(e) {
+								$(e).closest('.form-group').removeClass(
+										'has-info').addClass('has-error');
+							},
+
+							success : function(e) {
+								$(e).closest('.form-group').removeClass(
+										'has-error');
+								//.addClass('has-info');
+								$(e).remove();
+							},
+							errorPlacement : function(error, element) {
+								if (element.is('input[type=checkbox]')
+										|| element.is('input[type=radio]')) {
+									var controls = element
+											.closest('div[class*="col-"]');
+									if (controls.find(':checkbox,:radio').length > 1)
+										controls.append(error);
+									else
+										error.insertAfter(element.nextAll(
+												'.lbl:eq(0)').eq(0));
+								} else if (element.is('.select2')) {
+									error.insertAfter(element
+													.siblings('[class*="select2-container"]:eq(0)'));
+								} else if (element.is('.chosen-select')) {
+									error.insertAfter(element
+													.siblings('[class*="chosen-container"]:eq(0)'));
+								} else
+									error.insertAfter(element.parent().parent());
+							}/*,
+
+							 submitHandler : function(form) {
+							},
+							invalidHandler : function(form) {
+							} */
+						});
 	</script>
 </body>
 </html>
