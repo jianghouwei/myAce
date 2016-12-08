@@ -52,9 +52,9 @@ public class UserRealm extends AuthorizingRealm {
 			token.setUserId(user.getId());
 			byte[] salt = Encodes.decodeHex(user.getSalt());
 			// 设置用户session
-			setSession("userId", user.getId());
+			setSession("users", user);
 			return new SimpleAuthenticationInfo(user.getUserName(),
-					user.getPassword(), ByteSource.Util.bytes(salt), getName());
+					user.getPassword(), ByteSource.Util.bytes(salt), user.getNikeName()!= null ? user.getNikeName():user.getUserName() );
 		} else {
 			throw new UserInfoNullException("用户不存在！");
 		}
@@ -68,15 +68,13 @@ public class UserRealm extends AuthorizingRealm {
 			PrincipalCollection principals) {
 		SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 		ShiroUser shiroUser = (ShiroUser) principals.getPrimaryPrincipal();
-		// 依据登录名
-		// 把principals放session中 key=userId value=principals
 		SecurityUtils.getSubject().getSession().setAttribute(String.valueOf(shiroUser.getId()),
 						SecurityUtils.getSubject().getPrincipals());
-		Integer userId = (Integer) getSession("userId");
+		Users user = (Users) getSession("users");
 		Set<String> stringPermissions = null;// 权限
-		Set<String> roles = commonService.selectRoleByUserId(userId);// 角色
+		Set<String> roles = commonService.selectRoleByUserId(user.getId());// 角色
 		if (!roles.isEmpty()) {
-			stringPermissions = commonService.selectAuthByUserId(userId);
+			stringPermissions = commonService.selectAuthByUserId(user.getId());
 		}
 		// 赋予角色
 		for (String role : roles) {
@@ -92,7 +90,6 @@ public class UserRealm extends AuthorizingRealm {
 		 * 登录记录		   */	
 		/***************************/
 		return info;
-
 	}
 
 	protected static void setSession(Object key, Object value) {

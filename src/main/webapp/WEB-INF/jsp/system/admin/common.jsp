@@ -1,5 +1,6 @@
 <meta charset="utf-8" />
 <title>MyAceAdmin</title>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <!------------------------ BASE CSS START ----------------->
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="static/css/bootstrap.min.css" />

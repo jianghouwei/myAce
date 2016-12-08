@@ -56,7 +56,7 @@
 					系统管理</span> <b class="arrow fa fa-angle-down"></b>
 		</a> <b class="arrow"></b>
 			<ul class="submenu">
-				<li class="active"><a href="test/jqGrid" target="mainFrame"> <i
+				<li><a href="test/jqGrid" target="mainFrame"> <i
 						class="menu-icon fa fa-caret-right"></i> JqGrid test
 				</a> <b class="arrow"></b></li>
 

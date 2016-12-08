@@ -10,15 +10,16 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class TestJqGridController {
 
+	
 	/**
 	 * 访问登录页
 	 * @return
 	 */
-	@RequestMapping(value="/tologin")
-	public ModelAndView toLogin(HttpServletRequest request,
+	@RequestMapping(value="test/jqGrid")
+	public ModelAndView jqGrid(HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("system/admin/login");
+		mv.setViewName("system/test/jqGrid");
 		return mv;
 	}
 }

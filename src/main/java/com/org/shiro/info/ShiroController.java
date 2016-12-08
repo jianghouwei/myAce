@@ -9,12 +9,16 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authc.FormAuthenticationFilter;
 import org.apache.shiro.web.util.WebUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.org.sys.model.Users;
+import com.org.sys.service.CommonService;
 
 
 /**
@@ -28,35 +32,37 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class ShiroController {
 
+	@Autowired
+	private CommonService commonService;
 	/**
 	 * 访问登录页
 	 * @return
 	 */
-	@RequestMapping(value="test/jqGrid")
+	@RequestMapping(value="/tologin")
 	public ModelAndView toLogin(HttpServletRequest request,
 			HttpServletResponse response)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("system/test/jqGrid");
+		mv.setViewName("system/admin/login");
 		return mv;
-	}
-	
+	}	
 	/**
 	 * 登陆成功
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="admin/index",method = RequestMethod.GET)
+	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		ModelAndView mv = new ModelAndView();
-		/*Subject subject = SecurityUtils.getSubject();
-		UserInfo userinfo = this.getUserInfo();
-		if((subject.isAuthenticated()||subject.isRemembered())&& userinfo != null){
-			List<Resource> menuList = menuService.getMenusByUserId(userinfo.getId());
-			mv.addObject("menuList", menuList);
+		Subject subject = SecurityUtils.getSubject();
+		Users users = (Users) subject.getSession().getAttribute("users");
+		if((subject.isAuthenticated()||subject.isRemembered())&& users != null){
+			/*List<Resource> menuList = menuService.getMenusByUserId(userinfo.getId());
+			mv.addObject("menuList", menuList);*/
+			mv.addObject("users", users);
 			mv.setViewName("system/admin/index");
 			return mv;
-		}*/
+		}
 		WebUtils.getAndClearSavedRequest(request);
 		WebUtils.redirectToSavedRequest(request, response, "/");
 		mv.setViewName("system/admin/login");
@@ -70,20 +76,13 @@ public class ShiroController {
 	 * @return
 	 * @throws IOException 
 	 */
-	@RequestMapping(value="dologin",method = RequestMethod.POST)
+	@RequestMapping(value="/dologin",method = RequestMethod.POST)
 	public ModelAndView fail(@RequestParam(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM) String userName, Model model,
 			HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
 		model.addAttribute(FormAuthenticationFilter.DEFAULT_USERNAME_PARAM, userName);
 		ModelAndView mv = new ModelAndView();
 		Subject subject = SecurityUtils.getSubject();
-		/*UserInfo userinfo = this.getUserInfo();
-		if((subject.isAuthenticated()||subject.isRemembered())&& userinfo != null){
-			List<Resource> menuList = menuService.getMenusByUserId(userinfo.getId());
-			mv.addObject("menuList", menuList);
-			mv.setViewName("system/admin/index");
-			return mv;
-		}*/
 		subject.logout();
 		mv.setViewName("system/admin/login");
 		return mv;
@@ -104,7 +103,7 @@ public class ShiroController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="logout")
+	@RequestMapping(value="/logout")
 	public ModelAndView logout(HttpServletRequest request,
 			HttpServletResponse response,Model model) {
 		Subject subject = SecurityUtils.getSubject();

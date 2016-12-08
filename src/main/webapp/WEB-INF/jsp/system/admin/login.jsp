@@ -18,7 +18,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta charset="utf-8" />
 <title>Login Page - Ace Admin</title>
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="static/css/bootstrap.min.css" />
@@ -163,7 +162,6 @@
 
 										<div class="space-6"></div>
 										<p>请输入你绑定的邮箱地址</p>
-
 										<form>
 											<fieldset>
 												<label class="block clearfix"> <span
@@ -302,7 +300,7 @@
 	<script src="static/js/jquery-additional-methods.min.js"></script>
 	<script src="static/js/bootbox.js"></script>
 	<script src="static/js/jquery.maskedinput.min.js"></script>
-	<script src="static/js/jquery.maskedinput.min.js"></script>
+	<script src="static/js/jquery.tips.js"></script>
 	<!-- inline scripts related to this page -->
 	<script type="text/javascript">
 		jQuery(function($) {
@@ -320,10 +318,9 @@
 										+ genTimestamp());
 					});
 			var errormsg = "${error}".toString();
-			alert(errormsg);
-			if (errormsg == "com.org.utils.CaptchaException") {
+			if (errormsg == "com.org.shiro.exception.CaptchaException") {
 				$("#captcha").tips({
-					side : 1,
+					side : 2,
 					msg : "验证码输入有误",
 					bg : '#FF5080',
 					time : 5
@@ -340,7 +337,8 @@
 				});
 				$("#username").focus();
 			}
-			if (errormsg == "org.apache.shiro.authc.AuthenticationException") {
+			if (errormsg == "org.apache.shiro.authc.AuthenticationException"||
+					errormsg == "com.org.shiro.exception.UserInfoNullException") {
 				$("#username").tips({
 					side : 2,
 					msg : "用户不存在",
@@ -350,15 +348,6 @@
 				$("#username").focus();
 			}
 
-			if (errormsg == "com.org.utils.UserInfoNullException") {
-				$("#username").tips({
-					side : 2,
-					msg : "用户不存在",
-					bg : '#FF5080',
-					time : 5
-				});
-				$("#username").focus();
-			}
 			if (errormsg == "null") {
 				$("#username").tips({
 					side : 3,
@@ -467,12 +456,7 @@
 													.siblings('[class*="chosen-container"]:eq(0)'));
 								} else
 									error.insertAfter(element.parent().parent());
-							}/*,
-
-							 submitHandler : function(form) {
-							},
-							invalidHandler : function(form) {
-							} */
+							}
 						});
 	</script>
 </body>

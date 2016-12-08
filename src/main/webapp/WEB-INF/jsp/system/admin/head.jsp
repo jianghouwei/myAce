@@ -17,15 +17,14 @@
 			<li class="light-blue dropdown-modal"><a data-toggle="dropdown"
 				href="#" class="dropdown-toggle"> <img class="nav-user-photo"
 					src="static/images/avatars/user.jpg" alt="Jason's Photo" /> <span
-					class="user-info"> <small>欢迎,</small> Jason
+					class="user-info"> <small>欢迎,</small>${users.nikeName}
 				</span> <i class="ace-icon fa fa-caret-down"></i>
 				</a>
-				<ul
-					class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+				<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
 					<li><a href="#"> <i class="ace-icon fa fa-cog"></i>
 							设置
 					</a></li>
-					<li><a href="profile.html"> <i class="ace-icon fa fa-user"></i>
+					<li><a href="#"> <i class="ace-icon fa fa-user"></i>
 							个人中心
 					</a></li>
 					<li class="divider"></li>

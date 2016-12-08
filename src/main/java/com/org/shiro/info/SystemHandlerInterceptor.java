@@ -8,7 +8,6 @@ import org.apache.shiro.subject.Subject;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.org.shiro.model.ShiroUser;
 import com.org.sys.model.Users;
 
 /**
@@ -33,9 +32,8 @@ public class SystemHandlerInterceptor implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		Subject subject = SecurityUtils.getSubject();
-		ShiroUser su = (ShiroUser) subject.getSession().getAttribute("shiroUser");
 		Users ui = (Users) subject.getSession().getAttribute("users");
-		if(su != null && ui != null){
+		if(ui != null){
 			return true;
 		}else{
 			subject.logout();

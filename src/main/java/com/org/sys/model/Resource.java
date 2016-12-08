@@ -1,73 +1,104 @@
 package com.org.sys.model;
 
+import java.util.List;
+
+
 public class Resource {
-    private Integer id;
+	private Integer id;
 
-    private String menuName;
+	private String menuName;
 
-    private String menuIcon;
+	private String menuIcon;
 
-    private Integer levelPid;
+	private Integer levelPid;
 
-    private String leveSort;
+	private String leveSort;
 
-    private String menuMsg;
+	private String menuMsg;
 
-    private String menuUrl;
+	private String menuUrl;
 
-    public Integer getId() {
-        return id;
-    }
+	/**
+	 * 是否含有子节点
+	 */
+	private Boolean hasSubNode;
+	
+	/**
+	 * 子节点菜单
+	 */
+	private List<Resource> subMenu;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public String getMenuName() {
-        return menuName;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setMenuName(String menuName) {
-        this.menuName = menuName == null ? null : menuName.trim();
-    }
+	public String getMenuName() {
+		return menuName;
+	}
 
-    public String getMenuIcon() {
-        return menuIcon;
-    }
+	public void setMenuName(String menuName) {
+		this.menuName = menuName == null ? null : menuName.trim();
+	}
 
-    public void setMenuIcon(String menuIcon) {
-        this.menuIcon = menuIcon == null ? null : menuIcon.trim();
-    }
+	public String getMenuIcon() {
+		return menuIcon;
+	}
 
-    public Integer getLevelPid() {
-        return levelPid;
-    }
+	public void setMenuIcon(String menuIcon) {
+		this.menuIcon = menuIcon == null ? null : menuIcon.trim();
+	}
 
-    public void setLevelPid(Integer levelPid) {
-        this.levelPid = levelPid;
-    }
+	public Integer getLevelPid() {
+		return levelPid;
+	}
 
-    public String getLeveSort() {
-        return leveSort;
-    }
+	public void setLevelPid(Integer levelPid) {
+		this.levelPid = levelPid;
+	}
 
-    public void setLeveSort(String leveSort) {
-        this.leveSort = leveSort == null ? null : leveSort.trim();
-    }
+	public String getLeveSort() {
+		return leveSort;
+	}
 
-    public String getMenuMsg() {
-        return menuMsg;
-    }
+	public void setLeveSort(String leveSort) {
+		this.leveSort = leveSort == null ? null : leveSort.trim();
+	}
 
-    public void setMenuMsg(String menuMsg) {
-        this.menuMsg = menuMsg == null ? null : menuMsg.trim();
-    }
+	public String getMenuMsg() {
+		return menuMsg;
+	}
 
-    public String getMenuUrl() {
-        return menuUrl;
-    }
+	public void setMenuMsg(String menuMsg) {
+		this.menuMsg = menuMsg == null ? null : menuMsg.trim();
+	}
 
-    public void setMenuUrl(String menuUrl) {
-        this.menuUrl = menuUrl == null ? null : menuUrl.trim();
-    }
+	public String getMenuUrl() {
+		return menuUrl;
+	}
+
+	public void setMenuUrl(String menuUrl) {
+		this.menuUrl = menuUrl == null ? null : menuUrl.trim();
+	}
+
+	public Boolean getHasSubNode() {
+		return hasSubNode;
+	}
+
+	public void setHasSubNode(Boolean hasSubNode) {
+		this.hasSubNode = hasSubNode;
+	}
+
+	public List<Resource> getSubMenu() {
+		return subMenu;
+	}
+
+	public void setSubMenu(List<Resource> subMenu) {
+		this.subMenu = subMenu;
+	}
+	
+	
 }
