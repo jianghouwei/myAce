@@ -147,8 +147,9 @@
 		<result column="level_pid" property="levelPid" jdbcType="INTEGER" />
 		<result column="leve_sort" property="leveSort" jdbcType="VARCHAR" />
 		<result column="menu_msg" property="menuMsg" jdbcType="VARCHAR" />
-		<collection property="subMenu" column="id" ofType="java.lang.Integer"
-			select="findMenuByparentId"></collection>
+		<result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+		<collection property="subMenu" column="id" ofType="com.org.sys.model.Resource"
+		javaType="ArrayList" select="findMenuByParentId"></collection>
 	</resultMap>
 	
 	<select id="findMenuAll" resultMap="MenuMap">
@@ -159,12 +160,11 @@
 		order by leve_sort ASC
 	</select>
 
-	<select id="findMenuByparentId" parameterType="java.lang.Integer"
-		resultMap="MenuMap">
+	<select id="findMenuByParentId" resultMap="MenuMap">
 		select
 		<include refid="Base_Column_List" />
 		from resource
-		where level_pid=#{id,java.lang.Integer}
+		where level_pid=#{levelPid}
 		order by leve_sort
 		ASC
 	</select>

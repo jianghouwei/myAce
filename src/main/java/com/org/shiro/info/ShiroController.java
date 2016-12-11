@@ -1,6 +1,7 @@
 package com.org.shiro.info;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.org.sys.model.Resource;
 import com.org.sys.model.Users;
 import com.org.sys.service.CommonService;
 
@@ -49,7 +51,7 @@ public class ShiroController {
 	 * 登陆成功
 	 * @return
 	 * @throws IOException 
-	 */
+	 */    
 	@RequestMapping(value="/index",method = RequestMethod.GET)
 	public ModelAndView login(HttpServletRequest request,
 			HttpServletResponse response) throws IOException {
@@ -57,8 +59,8 @@ public class ShiroController {
 		Subject subject = SecurityUtils.getSubject();
 		Users users = (Users) subject.getSession().getAttribute("users");
 		if((subject.isAuthenticated()||subject.isRemembered())&& users != null){
-			/*List<Resource> menuList = menuService.getMenusByUserId(userinfo.getId());
-			mv.addObject("menuList", menuList);*/
+			List<Resource> menuList = commonService.findMenuAll(users.getId());
+			mv.addObject("menuList", menuList);
 			mv.addObject("users", users);
 			mv.setViewName("system/admin/index");
 			return mv;

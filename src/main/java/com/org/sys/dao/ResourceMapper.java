@@ -33,7 +33,7 @@ public interface ResourceMapper {
      * @return
      * @since JDK 1.7
      */
-     List<Resource> queryMenuList(Integer userId,Integer levelPid);
+   List<Resource> findMenuByParentId(Integer levelPid);
 
     int updateByPrimaryKeySelective(Resource record);
 

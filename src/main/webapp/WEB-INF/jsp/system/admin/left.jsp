@@ -1,24 +1,27 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <div id="sidebar" class="sidebar responsive ace-save-state">
 	<script type="text/javascript">
 		try {
 			ace.settings.loadState('sidebar')
 		} catch (e) {
 		}
-
-		function siMenu(id, fid, name, url) {
-			if (id != mid) {
+		//class="active open" active
+		function siMenu(id, fid) {
+			//alert(id+fid);
+			/* if (id != mid) {
 				$("#" + mid).removeClass();
 				mid = id;
 			}
 			if (fid != fmid) {
 				$("#" + fmid).removeClass();
 				fmid = fid;
-			}
+			} */
+			$(".active").removeClass();
 			$("#" + fid).attr("class", "active open");
 			$("#" + id).attr("class", "active");
-			top.mainFrame.tabAddHandler(id, name, url);
+			//top.mainFrame.tabAddHandler(id, name, url);
 		}
 	</script>
 	<!-- 快捷菜单栏  -->
@@ -48,37 +51,15 @@
 	</div> -->
 	<!-- /.sidebar-shortcuts -->
 	<ul class="nav nav-list">
-		<li class="active"><a href="index.html"> <i
-				class="menu-icon fa fa-tachometer"></i> <span class="menu-text">首页</span>
-		</a> <b class="arrow"></b></li>
-		<li class=""><a href="#" class="dropdown-toggle"> <i
-				class="menu-icon fa fa-desktop"></i> <span class="menu-text">
-					系统管理</span> <b class="arrow fa fa-angle-down"></b>
-		</a> <b class="arrow"></b>
-			<ul class="submenu">
-				<li><a href="test/jqGrid" target="mainFrame"> <i
-						class="menu-icon fa fa-caret-right"></i> JqGrid test
-				</a> <b class="arrow"></b></li>
-
-				<li class=""><a href="jqgrid.html"> <i
-						class="menu-icon fa fa-caret-right"></i> 动态表
-				</a><b class="arrow"></b></li>
-				<li><a href="#" class="dropdown-toggle"> <i
-						class="menu-icon fa fa-caret-right"></i> 菜单布局 <b
-						class="arrow fa fa-angle-down"></b>
-				</a> <b class="arrow"></b>
-					<ul class="submenu">
-						<li class=""><a href="top-menu.html"> <i
-								class="menu-icon fa fa-caret-right"></i> 顶部布局
-						</a> <b class="arrow"></b></li>
-
-						<li class=""><a href="two-menu-1.html"> <i
-								class="menu-icon fa fa-caret-right"></i> 布局2
-						</a><b class="arrow"></b></li>
-					</ul></li>
-			</ul></li>
+		<li><a href="index.html"> 
+		      <i class=""></i> 
+		      <span class="menu-text">首页</span></a> 
+		<b class="arrow"></b>
+		</li>
+		<c:set var="index" value="0" scope="request" /><!-- 自增序号，注意scope-->  
+		<c:set var="level" value="0" scope="request" /><!-- 记录树的层次，注意scope-->
+		<c:import url="menu_tree.jsp" />
 	</ul>
-
 	<!-- /.nav-list -->
 	<div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
 		<i id="sidebar-toggle-icon"

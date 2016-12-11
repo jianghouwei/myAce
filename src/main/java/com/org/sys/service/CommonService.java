@@ -1,7 +1,9 @@
 package com.org.sys.service;
 
+import java.util.List;
 import java.util.Set;
 
+import com.org.sys.model.Resource;
 import com.org.sys.model.Users;
 
 /**
@@ -50,5 +52,17 @@ public interface CommonService {
      * @since JDK 1.7
      */
     Set<String> selectAuthByUserId(Integer userId);
+    
+    
+    /**
+     * 
+     * 依据用户Id查询用户菜单
+     *
+     * @author mao.ru
+     * @param userId
+     * @return
+     * @since JDK 1.7
+     */
+    List<Resource> findMenuAll(Integer userId);
 
 }
