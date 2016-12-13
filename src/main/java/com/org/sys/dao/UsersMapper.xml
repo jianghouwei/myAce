@@ -20,7 +20,8 @@
 		<result column="joined" property="joined" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
-		id, uid, user_name, password, salt, sex, nike_name, phone, pic_url,
+		id, uid, user_name, password, salt, sex, nike_name, phone,
+		pic_url,
 		birthday, email,
 		tx_qq, wy_wb, tx_wx, maxim, joined
 	</sql>
@@ -36,18 +37,23 @@
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.org.sys.model.Users">
-		insert into users (id, uid, user_name,
+		insert into users (id, uid,
+		user_name,
 		password, salt, sex,
 		nike_name, phone, pic_url,
-		birthday, email, tx_qq,
+		birthday,
+		email, tx_qq,
 		wy_wb, tx_wx, maxim,
 		joined)
-		values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
+		values
+		(#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
 		#{userName,jdbcType=VARCHAR},
-		#{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
+		#{password,jdbcType=VARCHAR},
+		#{salt,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR},
 		#{nikeName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
 		#{picUrl,jdbcType=VARCHAR},
-		#{birthday,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{txQq,jdbcType=VARCHAR},
+		#{birthday,jdbcType=VARCHAR},
+		#{email,jdbcType=VARCHAR}, #{txQq,jdbcType=VARCHAR},
 		#{wyWb,jdbcType=VARCHAR}, #{txWx,jdbcType=VARCHAR},
 		#{maxim,jdbcType=VARCHAR},
 		#{joined,jdbcType=TIMESTAMP})
@@ -208,22 +214,29 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.org.sys.model.Users">
 		update users
-		set uid = #{uid,jdbcType=VARCHAR},
-		user_name = #{userName,jdbcType=VARCHAR},
+		set
+		uid = #{uid,jdbcType=VARCHAR},
+		user_name =
+		#{userName,jdbcType=VARCHAR},
 		password = #{password,jdbcType=VARCHAR},
 		salt = #{salt,jdbcType=VARCHAR},
 		sex = #{sex,jdbcType=VARCHAR},
 		nike_name = #{nikeName,jdbcType=VARCHAR},
-		phone = #{phone,jdbcType=VARCHAR},
+		phone =
+		#{phone,jdbcType=VARCHAR},
 		pic_url = #{picUrl,jdbcType=VARCHAR},
 		birthday = #{birthday,jdbcType=VARCHAR},
-		email = #{email,jdbcType=VARCHAR},
+		email =
+		#{email,jdbcType=VARCHAR},
 		tx_qq = #{txQq,jdbcType=VARCHAR},
-		wy_wb = #{wyWb,jdbcType=VARCHAR},
+		wy_wb =
+		#{wyWb,jdbcType=VARCHAR},
 		tx_wx = #{txWx,jdbcType=VARCHAR},
-		maxim = #{maxim,jdbcType=VARCHAR},
+		maxim =
+		#{maxim,jdbcType=VARCHAR},
 		joined = #{joined,jdbcType=TIMESTAMP}
-		where id = #{id,jdbcType=INTEGER}
+		where
+		id = #{id,jdbcType=INTEGER}
 	</update>
 	<select id="selectByLoginName" resultMap="BaseResultMap"
 		parameterType="java.lang.String">
@@ -234,4 +247,34 @@
 		OR phone =
 		#{loginName,jdbcType=VARCHAR}
 	</select>
+
+	<select id="selectOfCount" resultType="java.lang.Long"
+		parameterType="com.org.common.model.DtPage">
+		select
+		count(1)
+		from users
+		where 1=1
+		<if test="param != null">
+			<if test="param.userName != null">
+				and user_name = #{param.userName,jdbcType=VARCHAR}
+			</if>
+		</if>
+	</select>
+	<select id="selectOfPage" resultMap="BaseResultMap"
+		parameterType="com.org.common.model.DtPage">
+		select
+		<include refid="Base_Column_List" />
+		from users
+		where 1=1
+		<if test="param != null">
+			<if test="param.userName != null">
+				and user_name = #{param.userName,jdbcType=VARCHAR}
+			</if>
+		</if>
+		ORDER BY joined DESC
+		<if test="iDisplayStart != null and iDisplayLength != null">
+			limit #{iDisplayStart,jdbcType=INTEGER},#{iDisplayLength,jdbcType=INTEGER}
+		</if>
+	</select>
+
 </mapper>

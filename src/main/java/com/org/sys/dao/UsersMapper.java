@@ -1,5 +1,8 @@
 package com.org.sys.dao;
 
+import java.util.List;
+
+import com.org.common.model.DtPage;
 import com.org.sys.model.Users;
 
 public interface UsersMapper {
@@ -27,4 +30,9 @@ public interface UsersMapper {
      * @since JDK 1.7
      */
     Users selectByLoginName(String loginName);
+    
+    
+    Long selectOfCount(DtPage<Users> dp);
+    
+    List<Users> selectOfPage(DtPage<Users> dp);
 }

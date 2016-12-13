@@ -63,13 +63,13 @@
 <script src="static/js/ace.min.js"></script>
 
 <!-- page specific plugin scripts -->
-<script src="assets/js/jquery.dataTables.min.js"></script>
-<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
-<script src="assets/js/dataTables.buttons.min.js"></script>
-<script src="assets/js/buttons.flash.min.js"></script>
-<script src="assets/js/buttons.html5.min.js"></script>
-<script src="assets/js/buttons.print.min.js"></script>
-<script src="assets/js/buttons.colVis.min.js"></script>
-<script src="assets/js/dataTables.select.min.js"></script>
+<script src="static/js/jquery.dataTables.min.js"></script>
+<script src="static/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="static/js/dataTables.buttons.min.js"></script>
+<script src="static/js/buttons.flash.min.js"></script>
+<script src="static/js/buttons.html5.min.js"></script>
+<script src="static/js/buttons.print.min.js"></script>
+<script src="static/js/buttons.colVis.min.js"></script>
+<script src="static/js/dataTables.select.min.js"></script>
 
 <!------------------------------- basic scripts end ----------------------->

@@ -23,17 +23,18 @@ import com.org.sys.model.Users;
  * @version
  * @since JDK 1.7
  */
-public class BaseController {
+public class BaseController<T> {
 
 	protected Logger log = Logger.getLogger(this.getClass());
 
 	protected HttpServletRequest request;
 
 	protected HttpServletResponse response;
+	
 
 	/**
 	 * 
-	 * 获取用户角色权限
+	 * 获取用户信息
 	 *
 	 * @author mao.ru
 	 * @return
@@ -45,16 +46,31 @@ public class BaseController {
 			Users ui = (Users) subject.getSession().getAttribute("users");
 			return ui;
 		} catch (Exception e) {
+			log.info("获取用户信息失败！ ============================>msg=["+e.getMessage()+"]");
 		}
 		return null;
 	}
 
 	/**
-	 * 得到PageData
+	 * 获取分页参数
+	 * @param request
+	 * @return
 	 */
 	public DtPage<T> getPageData(HttpServletRequest request) {
-
-		return null;
+		DtPage<T> dt = new DtPage<T>();
+		String sEcho = request.getParameter("sEcho");
+		String iDisplayStart = request.getParameter("iDisplayStart");
+		String iDisplayLength = request.getParameter("iDisplayLength");
+		if(sEcho!= null){
+			dt.setsEcho(Long.valueOf(sEcho));
+		}
+		if(iDisplayStart!= null){
+			dt.setiDisplayStart(Long.valueOf(iDisplayStart));
+		}
+		if(sEcho!= null){
+			dt.setiDisplayLength(Long.valueOf(iDisplayLength));
+		}
+		return dt;
 	}
 
 	/**
