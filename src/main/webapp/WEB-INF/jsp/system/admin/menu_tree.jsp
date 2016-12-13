@@ -8,7 +8,7 @@
 			<c:when test="${not empty menu.subMenu}">
 				<a href="${menu.menuUrl == null ? '#' : menu.menuUrl}" class="dropdown-toggle" 
 				<c:if test="${menu.menuUrl != null && menu.menuUrl !='#'}"> target="mainFrame" </c:if> > 
-					<i class="${menu.menuIcon == null ? 'fa fa-list' : menu.menuIcon}"></i> 
+					<i class="menu-icon ${menu.menuIcon == null ? 'fa fa-list' : menu.menuIcon}"></i> 
 					<span class="menu-text">${menu.menuName }</span>
 					<b class="arrow fa fa-angle-down"></b>
 				</a>
@@ -16,7 +16,9 @@
 			</c:when>
 			<c:otherwise>
 				<a href="${menu.menuUrl == null ? '#' : menu.menuUrl}" 
-					<c:if test="${menu.menuUrl != null && menu.menuUrl !='#'}">target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }');"</c:if> > 
+					<c:if test="${menu.menuUrl != null && menu.menuUrl !='#'}">
+						target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }');"
+					</c:if> > 
 					<i class="menu-icon fa fa-leaf"></i>
 					<i class="${menu.menuIcon == null ? 'fa fa-list' : menu.menuIcon}"></i>
 					<span class="menu-text"> ${menu.menuName }</span>

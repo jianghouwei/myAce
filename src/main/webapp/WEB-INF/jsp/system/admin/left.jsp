@@ -52,7 +52,7 @@
 	<!-- /.sidebar-shortcuts -->
 	<ul class="nav nav-list">
 		<li><a href="index.html"> 
-		      <i class=""></i> 
+		      <i class="menu-icon fa fa-tachometer"></i> 
 		      <span class="menu-text">首页</span></a> 
 		<b class="arrow"></b>
 		</li>

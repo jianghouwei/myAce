@@ -1,6 +1,6 @@
 <meta charset="utf-8" />
 <title>MyAceAdmin</title>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags"%>
 <!------------------------ BASE CSS START ----------------->
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="static/css/bootstrap.min.css" />
@@ -61,5 +61,15 @@
 <!-- ace scripts -->
 <script src="static/js/ace-elements.min.js"></script>
 <script src="static/js/ace.min.js"></script>
+
+<!-- page specific plugin scripts -->
+<script src="assets/js/jquery.dataTables.min.js"></script>
+<script src="assets/js/jquery.dataTables.bootstrap.min.js"></script>
+<script src="assets/js/dataTables.buttons.min.js"></script>
+<script src="assets/js/buttons.flash.min.js"></script>
+<script src="assets/js/buttons.html5.min.js"></script>
+<script src="assets/js/buttons.print.min.js"></script>
+<script src="assets/js/buttons.colVis.min.js"></script>
+<script src="assets/js/dataTables.select.min.js"></script>
 
 <!------------------------------- basic scripts end ----------------------->
