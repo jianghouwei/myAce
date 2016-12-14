@@ -44,10 +44,10 @@
 		<!-- 菜单 -->
 		<%@ include file="left.jsp"%>
 		<div class="main-content">
+			<!-- <div class="breadcrumbs ace-save-state" id="breadcrumbs"></div> -->
 			<div class="main-content-inner">
-				<iframe name="mainFrame" id="mainFrame" 
-					frameborder="0" scrolling="no" width="100%" height="100%"
-					onload="this.height=100"></iframe>
+				<iframe name="mainFrame" id="mainFrame" frameborder="0" src="tab"
+					scrolling="no" width="100%" height="100%" onload="this.height=100"></iframe>
 			</div>
 		</div>
 		<div class="footer">
@@ -60,4 +60,7 @@
 		</a>
 	</div>
 </body>
+<script type="text/javascript">
+	
+</script>
 </html>

@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
 
@@ -50,17 +51,20 @@
 <body>
 	<div class="main-content">
 		<div class="main-content-inner">
-			<!-- <div class="page-header"></div> -->
-			<!-- /.page-header -->
 			<div class="row">
 				<div class="col-xs-12">
+					<div class="hr hr-18 dotted hr-double"></div>
 					<table id="userinfo-table"
 						class="table table-striped table-bordered table-hover">
-
 					</table>
 				</div>
 			</div>
 		</div>
+		<!-- 返回顶部 -->
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
 	</div>
 </body>
 <!-- basic scripts -->
@@ -108,7 +112,7 @@
 			"bRetrieve" : false,
 			"bDestroy" : true,
 			"bServerSide" : true,
-			"renderer":"bootstrap",
+			"renderer" : "bootstrap",
 			"sAjaxSource" : "sys/getUserPage.json",
 			"fnServerParams" : function(aoData) { //查询条件
 				aoData.push({

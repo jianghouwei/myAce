@@ -17,7 +17,7 @@
 			<c:otherwise>
 				<a href="${menu.menuUrl == null ? '#' : menu.menuUrl}" 
 					<c:if test="${menu.menuUrl != null && menu.menuUrl !='#'}">
-						target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }');"
+						target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }','${menu.menuName }','${menu.menuUrl }');"
 					</c:if> > 
 					<i class="menu-icon fa fa-leaf"></i>
 					<i class="${menu.menuIcon == null ? 'fa fa-list' : menu.menuIcon}"></i>
