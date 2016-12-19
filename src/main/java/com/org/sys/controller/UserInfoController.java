@@ -59,4 +59,40 @@ public class UserInfoController extends BaseController<Users>{
 		dp = usersService.getUserInfoOfCount(dp);
 		return JSON.toJSONString(dp);
 	}
+	
+	/**
+	 * 去编辑页面
+	 * @param request
+	 * @param record
+	 * @return
+	 */
+	@RequestMapping(value = "userinfo/goEdit")
+	public ModelAndView goUserInfoEdit(HttpServletRequest request,Users record){
+		ModelAndView mv = this.getMoV();
+		Users user = usersService.getUserInfoById(record.getId());
+		mv.addObject("userInfo", user);
+		mv.setViewName("system/userinfo/userinfo_edit");
+		return mv;
+	}
+	
+	/**
+	 * 
+	 * TODO(编辑页面保存)
+	 *
+	 * @author mao.ru
+	 * @param request
+	 * @param record
+	 * @return
+	 * @since JDK 1.7
+	 */
+	@ResponseBody
+	@RequestMapping(value = "userinfo/doEdit",produces = "application/json;charset=UTF-8")
+	public String doUserInfoEdit(HttpServletRequest request,Users record){
+		usersService.doUserInfoById(record);
+		return getRetMSg("用户信息更新成功", "ok");
+	}
+	
+	
+	
+	
 }

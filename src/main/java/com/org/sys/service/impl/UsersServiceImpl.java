@@ -26,4 +26,14 @@ public class UsersServiceImpl implements UsersService {
 		return dp;
 	}
 
+	@Override
+	public Users getUserInfoById(Integer id) {
+		return usersMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public void doUserInfoById(Users userinfo) {
+		usersMapper.updateByPrimaryKeySelective(userinfo);
+	}
+
 }
