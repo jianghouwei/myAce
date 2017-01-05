@@ -33,9 +33,8 @@
 		<script src="static/js/html5shiv.min.js"></script>
 		<script src="static/js/respond.min.js"></script>
 		<![endif]-->
-
-
 <!------------------------------------ BASE CSS END --------------------------------------->
+<link rel="stylesheet" href="static/css/fullcalendar.min.css" />
 
 
 
@@ -73,3 +72,8 @@
 <script src="static/js/dataTables.select.min.js"></script>
 
 <!------------------------------- basic scripts end ----------------------->
+<script src="static/js/jquery-ui.custom.min.js"></script>
+<script src="static/js/jquery.ui.touch-punch.min.js"></script>
+<script src="static/js/moment.min.js"></script>
+<script src="static/js/fullcalendar.min.js"></script>
+<script src="static/js/bootbox.js"></script>

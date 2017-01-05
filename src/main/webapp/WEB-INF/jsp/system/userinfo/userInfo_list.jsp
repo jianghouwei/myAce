@@ -11,7 +11,7 @@
 <html>
 <head>
 <base href="<%=basePath%>">
-<%-- <%@ include file="../../system/admin/common.jsp"%> --%>
+<%@ include file="../../system/admin/common.jsp"%>
 </head>
 <!-- bootstrap & fontawesome -->
 <link rel="stylesheet" href="static/css/bootstrap.min.css" />

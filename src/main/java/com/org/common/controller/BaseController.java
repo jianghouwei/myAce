@@ -12,7 +12,7 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.org.common.model.DtPage;
-import com.org.common.utils.UuidUtil;
+import com.org.common.util.UuidUtil;
 import com.org.sys.model.Users;
 
 /**

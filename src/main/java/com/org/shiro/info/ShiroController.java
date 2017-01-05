@@ -100,6 +100,17 @@ public class ShiroController {
 	}
 	
 	/**
+	 * 进入tab标签
+	 * @return
+	 */
+	@RequestMapping(value="/home")
+	public String home(){
+		return "system/admin/home";
+	}
+	
+	
+	
+	/**
 	 * 登出
 	 * @param userName
 	 * @param model

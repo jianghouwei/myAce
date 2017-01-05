@@ -1,4 +1,4 @@
-package com.org.common.utils;
+package com.org.common.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
