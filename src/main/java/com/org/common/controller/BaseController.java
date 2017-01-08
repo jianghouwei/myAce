@@ -15,7 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alibaba.fastjson.JSON;
 import com.org.common.model.DtPage;
-import com.org.common.utils.UuidUtil;
+import com.org.common.util.UuidUtil;
 import com.org.sys.model.Users;
 
 /**

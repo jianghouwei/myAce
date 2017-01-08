@@ -31,33 +31,36 @@
 			function reinitIframe() {
 				var iframe = document.getElementById("mainFrame");
 				try {
-					var bHeight = iframe.contentWindow.document.body.scrollHeight;
-					var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+					var bHeight = document.documentElement.clientHeight;
+					var dHeight = document.documentElement.scrollHeight;
 					var height = Math.max(bHeight, dHeight);
-					iframe.height = height;
-					console.log(height);
+					iframe.style.height = (height) + 'px';
 				} catch (ex) {
 				}
 			}
-			window.setInterval("reinitIframe()", 100);
+			reinitIframe();
+			window.onresize = function() {
+				reinitIframe();
+			};
 		</script>
 		<!-- 菜单 -->
 		<%@ include file="left.jsp"%>
 		<div class="main-content">
-			<div class="main-content-inner">
-				<iframe name="mainFrame" id="mainFrame" 
-					frameborder="0" scrolling="no" width="100%" height="100%"
-					onload="this.height=100"></iframe>
-			</div>
+			<iframe name="mainFrame" id="mainFrame" frameborder="0" src="tab"
+				scrolling="no" width="100%" height="100%"></iframe>
+			<!-- 返回顶部 -->
+			<a href="#" id="btn-scroll-up"
+				class="btn-scroll-up btn btn-sm btn-inverse"> <i
+				class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+			</a>
 		</div>
 		<div class="footer">
 			<!-- 底部  -->
 			<%@ include file="floor.jsp"%>
 		</div>
-		<a href="#" id="btn-scroll-up"
-			class="btn-scroll-up btn btn-sm btn-inverse"> <i
-			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-		</a>
 	</div>
 </body>
+<script type="text/javascript">
+	
+</script>
 </html>

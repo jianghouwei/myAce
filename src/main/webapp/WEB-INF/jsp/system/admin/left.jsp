@@ -7,25 +7,15 @@
 			ace.settings.loadState('sidebar')
 		} catch (e) {
 		}
-		//class="active open" active
-		function siMenu(id, fid) {
-			//alert(id+fid);
-			/* if (id != mid) {
-				$("#" + mid).removeClass();
-				mid = id;
-			}
-			if (fid != fmid) {
-				$("#" + fmid).removeClass();
-				fmid = fid;
-			} */
+		function siMenu(id, fid, name, url) {
 			$(".active").removeClass();
 			$("#" + fid).attr("class", "active open");
 			$("#" + id).attr("class", "active");
-			//top.mainFrame.tabAddHandler(id, name, url);
+			top.mainFrame.tabAddHandler(id, name, url);
 		}
 	</script>
 	<!-- 快捷菜单栏  -->
-	<!-- <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+	<div class="sidebar-shortcuts" id="sidebar-shortcuts">
 		<div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
 			<button class="btn btn-success">
 				<i class="ace-icon fa fa-signal"></i>
@@ -45,19 +35,18 @@
 		</div>
 		<div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
 			<span class="btn btn-success"></span> <span class="btn btn-info"></span>
-
 			<span class="btn btn-warning"></span> <span class="btn btn-danger"></span>
 		</div>
-	</div> -->
+	</div>
 	<!-- /.sidebar-shortcuts -->
 	<ul class="nav nav-list">
-		<li><a href="index.html"> 
-		      <i class="menu-icon fa fa-tachometer"></i> 
-		      <span class="menu-text">首页</span></a> 
-		<b class="arrow"></b>
-		</li>
-		<c:set var="index" value="0" scope="request" /><!-- 自增序号，注意scope-->  
-		<c:set var="level" value="0" scope="request" /><!-- 记录树的层次，注意scope-->
+		<li><a href="index.html"> <i
+				class="menu-icon fa fa-tachometer"></i> <span class="menu-text">首页</span></a>
+			<b class="arrow"></b></li>
+		<c:set var="index" value="0" scope="request" />
+		<!-- 自增序号，注意scope-->
+		<c:set var="level" value="0" scope="request" />
+		<!-- 记录树的层次，注意scope-->
 		<c:import url="menu_tree.jsp" />
 	</ul>
 	<!-- /.nav-list -->

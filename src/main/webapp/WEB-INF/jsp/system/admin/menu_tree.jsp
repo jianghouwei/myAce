@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:forEach var="menu" items="${menuList}" varStatus="vs">  
   <c:set var="index" value="${index + 1}" scope="request" /><!-- 每一次循环，index+1 -->  
    <li class="" id="menu${menu.id}">
@@ -15,14 +15,15 @@
 				<b class="arrow"></b>
 			</c:when>
 			<c:otherwise>
-				<a href="${menu.menuUrl == null ? '#' : menu.menuUrl}" 
+				<a  
 					<c:if test="${menu.menuUrl != null && menu.menuUrl !='#'}">
-						target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }');"
+						target="mainFrame" onclick="siMenu('menu${menu.id}','menu${menu.levelPid }','${menu.menuName }','${menu.menuUrl }');"
 					</c:if> > 
 					<i class="menu-icon fa fa-leaf"></i>
 					<i class="${menu.menuIcon == null ? 'fa fa-list' : menu.menuIcon}"></i>
 					<span class="menu-text"> ${menu.menuName }</span>
 				</a>
+				
 				<b class="arrow"></b>
 			</c:otherwise>
 		</c:choose>

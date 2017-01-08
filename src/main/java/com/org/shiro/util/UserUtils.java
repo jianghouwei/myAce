@@ -1,17 +1,17 @@
-package com.org.shiro.utils;
+package com.org.shiro.util;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.session.Session;
 
-import com.org.common.utils.Digests;
-import com.org.common.utils.Encodes;
+import com.org.common.util.Digests;
+import com.org.common.util.Encodes;
 import com.org.shiro.model.ShiroUser;
 import com.org.sys.model.Users;
 
 
 
 
-public class UserUtil {
+public class UserUtils {
 	
 	
 	/** 加密方法 */

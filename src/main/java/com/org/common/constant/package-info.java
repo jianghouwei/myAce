@@ -1,7 +1,7 @@
 /**
  * TODO {}
- * Date:2016年11月21日下午3:02:28
- * Copyright (c) 2016 .
+ * Date:2017年1月5日上午10:20:06
+ * Copyright (c) 2017 .
  * @author mao.ru 
  */
 /**
@@ -11,4 +11,4 @@
  * @version 
  * @since JDK 1.7
  */
-package com.org.common.utils;
+package com.org.common.constant;

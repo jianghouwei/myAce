@@ -15,22 +15,24 @@
 <body>
 	<div class="main-content">
 		<div class="main-content-inner">
-			<!-- <div class="page-header"></div> -->
-			<!-- /.page-header -->
 			<div class="row">
-				<div class="col-xs-12" style="height: 100%">
+				<div class="col-xs-12">
+					<div class="hr hr-18 dotted hr-double"></div>
 					<table id="userinfo-table"
 						class="table table-striped table-bordered table-hover">
-
 					</table>
 				</div>
 			</div>
 		</div>
+		<!-- 返回顶部 -->
+		<a href="#" id="btn-scroll-up"
+			class="btn-scroll-up btn btn-sm btn-inverse"> <i
+			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+		</a>
 	</div>
 	<div id="modal-table" class="modal fade" tabindex="-1">
 		<div class="modal-dialog">
-			<div class="modal-content">
-			</div>
+			<div class="modal-content"></div>
 			<!-- /.modal-dialog -->
 		</div>
 	</div>
@@ -38,6 +40,7 @@
 <script type="text/javascript">
 	jQuery(function($) {
 		//initiate dataTables plugin
+<<<<<<< HEAD
 		$('#userinfo-table')
 				.dataTable(
 						{
@@ -155,6 +158,7 @@
 								style : 'multi'
 							}
 						});
+
 	});
 </script>
 

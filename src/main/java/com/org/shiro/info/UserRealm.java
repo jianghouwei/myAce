@@ -21,11 +21,11 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.org.common.utils.Encodes;
+import com.org.common.util.Encodes;
 import com.org.shiro.exception.CaptchaException;
 import com.org.shiro.exception.UserInfoNullException;
 import com.org.shiro.model.ShiroUser;
-import com.org.shiro.utils.UserUtil;
+import com.org.shiro.util.UserUtils;
 import com.org.sys.model.Users;
 import com.org.sys.service.CommonService;
 
@@ -137,8 +137,8 @@ public class UserRealm extends AuthorizingRealm {
 	@PostConstruct
 	public void initCredentialsMatcher() {
 		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher(
-				UserUtil.HASH_ALGORITHM);
-		matcher.setHashIterations(UserUtil.HASH_INTERATIONS);
+				UserUtils.HASH_ALGORITHM);
+		matcher.setHashIterations(UserUtils.HASH_INTERATIONS);
 		setCredentialsMatcher(matcher);
 	}
 
