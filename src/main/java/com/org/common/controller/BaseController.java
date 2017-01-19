@@ -1,16 +1,19 @@
 package com.org.common.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
-import org.apache.poi.ss.formula.functions.T;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alibaba.fastjson.JSON;
 import com.org.common.model.DtPage;
 import com.org.common.util.UuidUtil;
 import com.org.sys.model.Users;
@@ -97,5 +100,13 @@ public class BaseController<T> {
 	 */
 	public String get32UUID() {
 		return UuidUtil.get32UUID();
+	}
+	
+	
+	public String getRetMSg(String msg,String status){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("status", status);
+		map.put("msg", msg);
+		return JSON.toJSONString(map);
 	}
 }

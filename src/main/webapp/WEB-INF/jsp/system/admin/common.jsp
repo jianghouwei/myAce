@@ -70,6 +70,8 @@
 <script src="static/js/buttons.print.min.js"></script>
 <script src="static/js/buttons.colVis.min.js"></script>
 <script src="static/js/dataTables.select.min.js"></script>
+<script src="static/js/moment.min.js"></script>
+
 
 <!------------------------------- basic scripts end ----------------------->
 <script src="static/js/jquery-ui.custom.min.js"></script>
