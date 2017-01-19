@@ -15,27 +15,28 @@ import com.org.common.model.DtPage;
 import com.org.sys.model.Users;
 import com.org.sys.service.UsersService;
 
-
 /**
  * 
  * TODO {用户管理}
  *
  * @author mao.ru
- * @version 
+ * @version
  * @since JDK 1.7
  */
 @Controller
-public class UserInfoController extends BaseController<Users>{
-	
+public class UserInfoController extends BaseController<Users> {
+
 	@Autowired
 	private UsersService usersService;
+
 	/**
 	 * 访问用户列表页
+	 * 
 	 * @return
 	 */
-	@RequestMapping(value="sys/userinfo")
+	@RequestMapping(value = "sys/userinfo")
 	public ModelAndView index(HttpServletRequest request,
-			HttpServletResponse response)throws Exception{
+			HttpServletResponse response) throws Exception {
 		ModelAndView mv = this.getMoV();
 		mv.setViewName("system/userinfo/userInfo_list");
 		return mv;
@@ -52,11 +53,11 @@ public class UserInfoController extends BaseController<Users>{
 	 * @since JDK 1.7
 	 */
 	@ResponseBody
-	@RequestMapping(value = "sys/getUserPage",produces = "application/json;charset=UTF-8")
-	public String getUserInfoPage(HttpServletRequest request,Users record){
+	@RequestMapping(value = "sys/getUserPage", produces = "application/json;charset=UTF-8")
+	public String getUserInfoPage(HttpServletRequest request, Users record) {
 		DtPage<Users> dp = getPageData(request);
 		dp.setParam(record);
-		dp = usersService.getUserInfoOfCount(dp);
+		dp = usersService.getUserInfoOfPage(dp);
 		return JSON.toJSONString(dp);
 	}
 }

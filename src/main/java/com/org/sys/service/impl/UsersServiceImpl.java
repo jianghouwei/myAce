@@ -17,7 +17,7 @@ public class UsersServiceImpl implements UsersService {
 	private UsersMapper usersMapper;
 
 	@Override
-	public DtPage<Users> getUserInfoOfCount(DtPage<Users> dp) {
+	public DtPage<Users> getUserInfoOfPage(DtPage<Users> dp) {
 		Long count = usersMapper.selectOfCount(dp);
 		List<Users> list = usersMapper.selectOfPage(dp);
 		dp.setAaData(list);

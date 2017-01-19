@@ -35,6 +35,7 @@
 			<value>
 				/logout                     = logout
 				/tologin					= anon
+				/create*					= anon
 				/static/login/** 			= anon
 				/static/js/** 				= anon
 	           	/login          			= authc

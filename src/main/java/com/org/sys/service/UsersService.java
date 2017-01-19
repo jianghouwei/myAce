@@ -18,5 +18,5 @@ public interface UsersService {
 	 * @param dp
 	 * @return
 	 */
-	DtPage<Users> getUserInfoOfCount(DtPage<Users> dp);
+	DtPage<Users> getUserInfoOfPage(DtPage<Users> dp);
 }
