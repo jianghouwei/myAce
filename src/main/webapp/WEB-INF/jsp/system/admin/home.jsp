@@ -34,7 +34,6 @@
 								<div class="widget-header">
 									<h4>标签</h4>
 								</div>
-
 								<div class="widget-body">
 									<div class="widget-main no-padding">
 										<div id="external-events">

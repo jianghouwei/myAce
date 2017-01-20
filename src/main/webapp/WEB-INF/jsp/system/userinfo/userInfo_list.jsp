@@ -2,7 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
 
@@ -30,16 +31,9 @@
 			class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
 		</a>
 	</div>
-	<div id="modal-table" class="modal fade" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content"></div>
-			<!-- /.modal-dialog -->
-		</div>
-	</div>
 </body>
 <script type="text/javascript">
 	jQuery(function($) {
-		//initiate dataTables plugin
 		$('#userinfo-table')
 				.dataTable(
 						{
@@ -124,13 +118,12 @@
 										"sWidth" : "7%",
 										"mDataProp" : "birthday",
 										"mRender" : function(data, type, full) {
-											if(data !=null){
-												return moment(data).format('YYYY-MM-DD')
-											}else{
+											if (data != null) {
+												return moment(data).format(
+														'YYYY-MM-DD')
+											} else {
 												return null;
 											}
-											
-											//return new Date(data);
 										}
 									},
 									{
@@ -148,14 +141,13 @@
 										"mRender" : function(data, type, full) {
 											var html = '<div class="hidden-sm hidden-xs action-buttons">'
 													+ '<a class="blue tooltip-info" data-toggle="modal" data-rel="tooltip" role="button" title="查看" href="#modal-table"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>'
-													+ '<a class="green tooltip-info" data-toggle="modal" role="button" href="userinfo/goEdit.do?id='+full.id+'" data-rel="tooltip" data-target="#modal-table" title="编辑" ><i class="ace-icon fa fa-pencil bigger-130"></i></a>'
+													+ '<a class="green tooltip-info" data-toggle="modal" role="button" href="userinfo/goEdit.do?id='
+													+ full.id
+													+ '" data-rel="tooltip" data-target="#modal-table" title="编辑" ><i class="ace-icon fa fa-pencil bigger-130"></i></a>'
 													+ '<a class="red tooltip-info" data-toggle="modal" role="button" href="#modal-table" data-rel="tooltip" title="删除" ><i class="ace-icon fa fa-trash-o bigger-130"></i></a></div>';
 											return html;
 										}
-									} ],
-							select : {
-								style : 'multi'
-							}
+									} ]
 						});
 
 	});

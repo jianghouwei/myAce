@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
 <div class="modal-header no-padding">
 	<div class="table-header">
 		<button type="button" class="close" data-dismiss="modal"
@@ -61,6 +60,9 @@
 		todayHighlight : true
 	})
 	//-->
+	$(function() {
+		$.jGrowl();
+	});
 	//编辑保存
 	function editSave() {
 		var param = new Object();
@@ -68,6 +70,7 @@
 		param.nikeName= $("#nikeName").val();
 	    param.phone= $("#phone").val();
 	    param.birthday= $("#birthday").val();
+	    
 		$.ajax({
 			url : "userinfo/doEdit.json",
 			data : param,
@@ -75,13 +78,14 @@
 			type : "post",
 			success : function(data) {
 				if (data.status == "ok") {
-					alert(data.msg);
 					$('#modal-table').modal('hide');
 					$('#userinfo-table').dataTable().fnDraw(false);
-					 /* otable = $('#userinfo-table').dataTable({bRetrieve : true});
-				       otable.fnDraw(); */
+					/* jgrowlAlertMsg("编辑保存成功!"); */
+					$.jGrowl("编辑保存成功!", {
+						life : 3000,
+						position : "bottom-right"
+					});
 				} else {
-					alert("失败");
 				}
 			}
 		})

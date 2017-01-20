@@ -35,8 +35,10 @@
 		<![endif]-->
 <!------------------------------------ BASE CSS END --------------------------------------->
 <link rel="stylesheet" href="static/css/fullcalendar.min.css" />
-
-
+<link rel="stylesheet" href="plugins/jgrowl/jquery.jgrowl.css"
+	type="text/css" />
+<link rel="stylesheet" href="plugins/toastmessage/css/jquery.toastmessage.css" />	
+	
 
 <!------------------------------- basic scripts start ----------------------->
 <!-- basic scripts -->
@@ -79,3 +81,14 @@
 <script src="static/js/moment.min.js"></script>
 <script src="static/js/fullcalendar.min.js"></script>
 <script src="static/js/bootbox.js"></script>
+<script src="plugins/jgrowl/jquery.jgrowl.js"></script>
+<script src="plugins/jgrowl/jquery.toastmessage.js"></script>
+<script src="static/common/common.tip.js"></script>
+
+
+<div id="modal-table" class="modal fade" tabindex="-1">
+	<div class="modal-dialog">
+		<div class="modal-content"></div>
+		<!-- /.modal-dialog -->
+	</div>
+</div>
