@@ -13,6 +13,10 @@ import com.org.sys.model.Users;
 
 public class UserUtils {
 	
+	/**
+	 * 新增用户初始密码
+	 */
+	public final static String USER_PWD_DEF = "123456";
 	
 	/** 加密方法 */
 	public static final String HASH_ALGORITHM = "SHA-1";
@@ -63,12 +67,12 @@ public class UserUtils {
 	/**
 	 * 设定安全的密码，生成随机的salt并经过1024次 sha-1 hash
 	 */
-	public static void entryptPassword(Users user) {
+	public static Users entryptPassword(Users user) {
 		byte[] salt = Digests.generateSalt(SALT_SIZE);
-		//user.setSalt(Encodes.encodeHex(salt));
-
+		user.setSalt(Encodes.encodeHex(salt));
 		byte[] hashPassword = Digests.sha1(user.getPassword().getBytes(), salt, HASH_INTERATIONS);
 		user.setPassword(Encodes.encodeHex(hashPassword));
+		return user;
 	}
 }
  

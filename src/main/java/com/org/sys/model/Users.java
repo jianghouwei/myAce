@@ -34,6 +34,8 @@ public class Users {
     private String maxim;
 
     private Date joined;
+    
+    private String isDel;
 
     public Integer getId() {
         return id;
@@ -162,4 +164,14 @@ public class Users {
     public void setJoined(Date joined) {
         this.joined = joined;
     }
+
+	public String getIsDel() {
+		return isDel;
+	}
+
+	public void setIsDel(String isDel) {
+		this.isDel = isDel;
+	}
+    
+    
 }

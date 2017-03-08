@@ -35,4 +35,13 @@ public interface UsersMapper {
     Long selectOfCount(DtPage<Users> dp);
     
     List<Users> selectOfPage(DtPage<Users> dp);
+    
+    /**
+     *  删除用户Id
+     *
+     * @author mao.ru
+     * @param id
+     * @since JDK 1.7
+     */
+    void delUserInfoById(Integer id);
 }

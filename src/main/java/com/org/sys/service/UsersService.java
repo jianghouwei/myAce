@@ -35,4 +35,24 @@ public interface UsersService {
 	 * @param userinfo
 	 */
 	void doUserInfoById(Users userinfo);
+
+	/**
+	 *
+	 * TODO(依据用户Id进行逻辑删除).<br/>
+	 *
+	 * @author mao.ru
+	 * @param id
+	 * @since JDK 1.7
+	 */
+	void delUserInfoById(Integer id);
+
+	/**
+	 * 新增用户
+	 *
+	 * @author mao.ru
+	 * @param record
+	 * @return
+	 * @since JDK 1.7
+	 */
+	int insertUserInfoSelective(Users record);
 }

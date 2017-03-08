@@ -16,12 +16,13 @@
 		<result column="tx_qq" property="txQq" jdbcType="VARCHAR" />
 		<result column="wy_wb" property="wyWb" jdbcType="VARCHAR" />
 		<result column="tx_wx" property="txWx" jdbcType="VARCHAR" />
+		<result column="is_del" property="isDel" jdbcType="VARCHAR" />
 		<result column="maxim" property="maxim" jdbcType="VARCHAR" />
 		<result column="joined" property="joined" jdbcType="TIMESTAMP" />
 	</resultMap>
 	<sql id="Base_Column_List">
 		id, uid, user_name, password, salt, sex, nike_name, phone,
-		pic_url,
+		pic_url,is_del,
 		birthday, email,
 		tx_qq, wy_wb, tx_wx, maxim, joined
 	</sql>
@@ -43,7 +44,7 @@
 		nike_name, phone, pic_url,
 		birthday,
 		email, tx_qq,
-		wy_wb, tx_wx, maxim,
+		wy_wb, tx_wx, maxim,is_del,
 		joined)
 		values
 		(#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR},
@@ -56,6 +57,7 @@
 		#{email,jdbcType=VARCHAR}, #{txQq,jdbcType=VARCHAR},
 		#{wyWb,jdbcType=VARCHAR}, #{txWx,jdbcType=VARCHAR},
 		#{maxim,jdbcType=VARCHAR},
+		#{isDel,jdbcType=VARCHAR},
 		#{joined,jdbcType=TIMESTAMP})
 	</insert>
 	<insert id="insertSelective" parameterType="com.org.sys.model.Users">
@@ -105,6 +107,9 @@
 			</if>
 			<if test="maxim != null">
 				maxim,
+			</if>
+			<if test="isDel != null">
+				is_del,
 			</if>
 			<if test="joined != null">
 				joined,
@@ -156,6 +161,9 @@
 			<if test="maxim != null">
 				#{maxim,jdbcType=VARCHAR},
 			</if>
+			<if test="isDel != null">
+				isDel,
+			</if>
 			<if test="joined != null">
 				#{joined,jdbcType=TIMESTAMP},
 			</if>
@@ -206,6 +214,9 @@
 			<if test="maxim != null">
 				maxim = #{maxim,jdbcType=VARCHAR},
 			</if>
+			<if test="isDel != null">
+				isDel = #{is_del,jdbcType=VARCHAR},
+			</if>
 			<if test="joined != null">
 				joined = #{joined,jdbcType=TIMESTAMP},
 			</if>
@@ -229,12 +240,18 @@
 		email =
 		#{email,jdbcType=VARCHAR},
 		tx_qq = #{txQq,jdbcType=VARCHAR},
-		wy_wb =
-		#{wyWb,jdbcType=VARCHAR},
+		wy_wb = #{wyWb,jdbcType=VARCHAR},
 		tx_wx = #{txWx,jdbcType=VARCHAR},
-		maxim =
-		#{maxim,jdbcType=VARCHAR},
+		maxim = #{maxim,jdbcType=VARCHAR},
+		isDel = #{is_del,jdbcType=VARCHAR},
 		joined = #{joined,jdbcType=TIMESTAMP}
+		where
+		id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="delByUserId" parameterType="java.lang.Integer">
+		update users
+		set
+		isDel = '2'
 		where
 		id = #{id,jdbcType=INTEGER}
 	</update>
@@ -255,8 +272,11 @@
 		from users
 		where 1=1
 		<if test="param != null">
-			<if test="param.userName != null">
+			<if test="param.userName != null and param.userName != ''">
 				and user_name = #{param.userName,jdbcType=VARCHAR}
+			</if>
+			<if test="param.phone != null and param.phone != ''">
+				and phone = #{param.phone,jdbcType=VARCHAR}
 			</if>
 		</if>
 	</select>
@@ -267,8 +287,11 @@
 		from users
 		where 1=1
 		<if test="param != null">
-			<if test="param.userName != null">
+			<if test="param.userName != null and param.userName != ''">
 				and user_name = #{param.userName,jdbcType=VARCHAR}
+			</if>
+			<if test="param.phone != null and param.phone != ''">
+				and phone = #{param.phone,jdbcType=VARCHAR}
 			</if>
 		</if>
 		ORDER BY joined DESC

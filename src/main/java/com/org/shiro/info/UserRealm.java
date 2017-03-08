@@ -54,7 +54,8 @@ public class UserRealm extends AuthorizingRealm {
 			// 设置用户session
 			setSession("users", user);
 			return new SimpleAuthenticationInfo(user.getUserName(),
-					user.getPassword(), ByteSource.Util.bytes(salt), user.getNikeName()!= null ? user.getNikeName():user.getUserName() );
+					user.getPassword(), ByteSource.Util.bytes(salt), 
+					user.getNikeName()!= null ? user.getNikeName():user.getUserName() );
 		} else {
 			throw new UserInfoNullException("用户不存在！");
 		}

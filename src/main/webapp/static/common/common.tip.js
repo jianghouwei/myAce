@@ -23,6 +23,37 @@ $.jGrowl("A message ",
 				});*/
 
 /**
+ * 成功提示
+ */
+function alertSufMsg() {
+	$.jGrowl("操作成功", {
+		life : 3000,
+		position : "bottom-right"
+	});
+}
+/**
+ * 失败通用提示
+ * 3秒后消失
+ */
+function alertErrorMsg() {
+	$.jGrowl("操作失败", {
+		life : 3000,
+		position : "bottom-right"
+	});
+}
+/**
+ * 返回指定输出内容
+ * 默认显示时间3毫秒
+ * @param msg
+ */
+function alertMsg(msg) {
+	$.jGrowl(msg, {
+		life : 3000,
+		position : "bottom-right"
+	});
+}
+
+/**
  * 操作提示
  */
 function jgrowlAlertMsg(msg) {
@@ -30,25 +61,8 @@ function jgrowlAlertMsg(msg) {
 		life : 50000,
 		position : "bottom-right"
 	});
-	alert(11111111);
 };
-/**
- * Sample 1：提示后自动消息
- * 
- * @param n1
- * @param n2
- */
-function jgrowlmsg(msg) {
-	$.jGrowl(msg);
-};
-/**
- * Sample 4：指定时间后关闭 毫秒级
- */
-function jgrowlTimeMsg(msg, time) {
-	$.jGrowl(msg, {
-		life : time
-	});
-};
+
 
 function showStickySuccessToast() {
 	$().toastmessage('showToast', {

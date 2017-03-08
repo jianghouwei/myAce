@@ -19,7 +19,16 @@
 			<div class="row">
 				<div class="col-xs-12">
 					<div class="hr hr-18 dotted hr-double"></div>
-					<table id="userinfo-table"
+					<div class="col-sm-12">
+						<label class="control-label no-padding-right">用户名</label> <span
+							class="input-icon"> <input type="text" id="userName" /> <i
+							class="ace-icon fa fa-leaf blue"></i>
+						</span> <label class="control-label no-padding-right">手机号码</label> <span
+							class="input-icon input-icon-right"> <input type="text"
+							id="phone" /> <i class="ace-icon fa fa-leaf green"></i>
+						</span>
+					</div>
+					<table id="userinfo_table"
 						class="table table-striped table-bordered table-hover">
 					</table>
 				</div>
@@ -34,7 +43,7 @@
 </body>
 <script type="text/javascript">
 	jQuery(function($) {
-		$('#userinfo-table')
+		$('#userinfo_table')
 				.dataTable(
 						{
 							bAutoWidth : false,
@@ -50,13 +59,16 @@
 							"bServerSide" : true,
 							"renderer" : "bootstrap",
 							'sPaginationType' : 'full_numbers',
-							"sAjaxSource" : "sys/getUserPage.json",
-							/* "fnServerParams" : function(aoData) { //查询条件
+							"sAjaxSource" : "userinfo/getPage.json",
+							"fnServerParams" : function(aoData) { //查询条件
 								aoData.push({
 									"name" : "userName",
-									"value" : "admin"
+									"value" : $("#userName").val()
+								}, {
+									"name" : "phone",
+									"value" : $("#phone").val()
 								});
-							}, */
+							},
 							"language" : {
 								"lengthMenu" : "_MENU_ 条记录每页",
 								"zeroRecords" : "没有找到记录",
@@ -139,18 +151,65 @@
 										"sWidth" : "7%",
 										"sClass" : "center",
 										"mRender" : function(data, type, full) {
-											var html = '<div class="hidden-sm hidden-xs action-buttons">'
-													+ '<a class="blue tooltip-info" data-toggle="modal" data-rel="tooltip" role="button" title="查看" href="#modal-table"><i class="ace-icon fa fa-search-plus bigger-130"></i></a>'
-													+ '<a class="green tooltip-info" data-toggle="modal" role="button" href="userinfo/goEdit.do?id='
+											/* var html = '<div class="hidden-sm hidden-xs action-buttons">'
+													+ '<a class="blue  tooltip-info" data-toggle="modal"  data-target="#modal-table" '
+													+ 'onclick="goView();"'
+													+ '" data-rel="tooltip" role="button" title="查看" ><i class="ace-icon fa fa-search-plus bigger-130"></i></a>'
+													+ '<a class="green tooltip-info" data-toggle="modal"  data-target="#modal-table" href="userinfo/goEdit.do?id='
 													+ full.id
-													+ '" data-rel="tooltip" data-target="#modal-table" title="编辑" ><i class="ace-icon fa fa-pencil bigger-130"></i></a>'
-													+ '<a class="red tooltip-info" data-toggle="modal" role="button" href="#modal-table" data-rel="tooltip" title="删除" ><i class="ace-icon fa fa-trash-o bigger-130"></i></a></div>';
+													+ "&random"
+													+ Math.random()
+													+ '" data-rel="tooltip" role="button" title="编辑" ><i class="ace-icon fa fa-pencil bigger-130"></i></a>'
+													+ '<a class="red tooltip-info" role="button"  onclick="doDel('
+													+ full.id
+													+ ');" data-rel="tooltip" title="删除" ><i class="ace-icon fa fa-trash-o bigger-130"></i></a></div>';
+											return html; */
+											var html = '<div class="hidden-sm hidden-xs action-buttons">'
+													+ '<a class="blue tooltip" onclick="goView('+full.id+');" title="查看" data-rel="tooltip" role="button"> <i class="ace-icon fa fa-search-plus bigger-130"></i></a>'
+													+ '<a class="green tooltip" onclick="goView('+full.id+');" title="编辑" data-rel="tooltip" role="button"> <i class="ace-icon fa fa-pencil bigger-130"></i></a>'
+													+ '<a class="red tooltip"  onclick="goView('+full.id+');" title="删除" data-rel="tooltip" role="button"> <i class="ace-icon fa fa-trash-o bigger-130"></i></a>'
+													+ '</div>';
 											return html;
 										}
 									} ]
 						});
-
 	});
+
+	/*
+	 * 数据删除
+	 */
+	function doDel(Id) {
+		var url = "userinfo/doDel?id=" + Id;
+		doDelById(url, userinfo_table);
+	}
+	/*
+	 * 查看用户信息
+	 */
+	function goView(Id) {
+		var url = "<%=basePath%>userinfo/goView?id=" + Id;
+		
+		var diag = new Dialog();
+		/* diag.Width = 300;
+		diag.Height = 150; */
+		diag.Title = "用户信息";
+		diag.Drag=true;
+		diag.URL=url;
+		diag.show();
+	}
+	/*
+	 * 编辑
+	 */
+	function goEdit(Id) {
+		var url = "userinfo/goEdit?id=" + Id;
+		queryOfId(url);
+	}
+	/*
+	 * 新增
+	 */
+	function goAdd(Id) {
+		var url = "userinfo/goAdd?id=" + Id;
+	}
+	
 </script>
 
 
